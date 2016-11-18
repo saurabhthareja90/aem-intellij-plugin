@@ -1,0 +1,41 @@
+<!--suppress XmlUnboundNsPrefix -->
+<idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
+	<id>co.nums.aem</id>
+	<name>AEM IntelliJ Plugin</name>
+	<version>1.0</version>
+	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
+
+	<description><![CDATA[
+      Features:
+      <li>
+        <ul>HTL (Sightly) support: syntax validation, highlighting, refactoring, code completions, quick fixes and more</ul>
+      </li>
+    ]]></description>
+
+	<depends>com.intellij.modules.lang</depends>
+	<depends optional="true">JavaScript</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<fileTypeFactory implementation="co.nums.intellij.aem.htl.file.HtlFileTypeFactory"/>
+		<html.scriptContentProvider
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.HtlScriptContentProvider"/>
+		<lang.parserDefinition
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.parsing.HtlParserDefinition"/>
+		<lang.fileViewProviderFactory
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.file.HtlFileViewProviderFactory"/>
+		<completion.contributor
+				language="HTML"
+				implementationClass="co.nums.intellij.aem.htl.completion.HtlAttributesCompletionContributor"/>
+
+		<iconProvider implementation="co.nums.intellij.aem.htl.file.HtlIconProvider"/>
+		<lang.substitutor language="HTML" implementationClass="co.nums.intellij.aem.htl.file.HtlLanguageSubstitutor"/>
+
+		<lang.syntaxHighlighterFactory
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.highlighter.HtlSyntaxHighlighterFactory"/>
+	</extensions>
+
+</idea-plugin>

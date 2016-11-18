@@ -1,0 +1,108 @@
+{
+  parserClass="co.nums.intellij.aem.htl.parsing.HtlParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Htl"
+  psiImplClassSuffix="Impl"
+  psiPackage="co.nums.intellij.aem.htl.psi"
+  psiImplPackage="co.nums.intellij.aem.htl.psi.impl"
+
+  elementTypeHolderClass="co.nums.intellij.aem.htl.psi.HtlTokenTypes"
+  elementTypeClass="co.nums.intellij.aem.htl.psi.HtlElementType"
+  tokenTypeClass="co.nums.intellij.aem.htl.psi.HtlTokenType"
+
+  tokens = [
+    HTL_FRAGMENT='HTL_FRAGMENT'
+    HTML_FRAGMENT='regexp:(?:(?!\$\{).)*'
+    ESC_EXPR='regexp:\\\$\{.*}'
+
+    EXPR_START='${'
+    EXPR_END='}'
+
+    BOOLEAN_TRUE='true'
+    BOOLEAN_FALSE='false'
+
+    DOT='.';
+    COMMA=',';
+    OPTIONS_SEPARATOR='@';
+
+    LEFT_PARENTH='(';
+    RIGHT_PARENTH=')';
+    LEFT_BRACKET='[';
+    RIGHT_BRACKET=']';
+
+    ASSIGN='=';
+    AND='&&';
+    OR='||';
+    NOT='!';
+    TERNARY_QUESTION_OP=' ? ';
+    TERNARY_BRANCHES_OP=' : ';
+
+    LT='<';
+    LEQ='<=';
+    GEQ='>=';
+    GT='>';
+    EQ='==';
+    NEQ='!=';
+
+    IDENTIFIER='regexp:[\p{Alpha}_][\p{Alnum}_:]*'
+    INTEGER_NUMBER='regexp:0|[1-9]\d*'
+    FLOAT_NUMBER='regexp:[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?|[0-9]+[eE][-+]?[0-9]+'
+    DOUBLE_QUOTED_STRING='regexp:"([^\\"\r\n]|\\([\\"/bfnrt]|u[a-fA-F0-9]{4}))*"'
+    SINGLE_QUOTED_STRING="regexp:'([^\\'\r\n]|\\([\\'/bfnrt]|u[a-fA-F0-9]{4}))*'"
+
+    space='regexp:\s+'
+  ]
+}
+
+interpolation ::= (expression | textFragment)*
+
+textFragment ::= HTML_FRAGMENT+ | ESC_EXPR+
+
+expression ::= '${' exprNode? ['@' optionList] '}'
+
+optionList ::= option (',' option)*
+
+option ::= IDENTIFIER ['=' exprNode]
+
+exprNode ::= binaryOp [TERNARY_QUESTION_OP binaryOp TERNARY_BRANCHES_OP binaryOp]
+
+binaryOp ::= comparisonTerm (operator comparisonTerm)*
+
+comparisonTerm ::= factor [comparisonOp factor]
+
+operator ::= '&&'
+           | '||'
+
+comparisonOp ::= '>'
+               | '<'
+               | '>='
+               | '<='
+               | '=='
+               | '!='
+
+factor ::= term
+         | '!' term
+
+term ::= simple ('[' exprNode ']' | '.' field)*
+
+field ::= IDENTIFIER
+
+simple ::= atom
+         | '(' exprNode ')'
+         | '[' valueList ']'
+         | '[' ']'
+
+valueList ::= exprNode (',' exprNode)*
+
+atom ::= IDENTIFIER
+     | string_literal
+     | INTEGER_NUMBER
+     | FLOAT_NUMBER
+     | boolean_constant
+
+string_literal ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+
+private boolean_constant ::= BOOLEAN_TRUE | BOOLEAN_FALSE
+
