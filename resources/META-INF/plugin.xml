@@ -1,15 +1,19 @@
 <!--suppress XmlUnboundNsPrefix -->
 <idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
-	<id>co.nums.aem</id>
+	<id>co.nums.intellij.aem</id>
 	<name>AEM IntelliJ Plugin</name>
 	<version>1.0</version>
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
-      Features:
-      <li>
-        <ul>HTL (Sightly) support: syntax validation, highlighting, refactoring, code completions, quick fixes and more</ul>
-      </li>
+      <h3>Features<h3>
+      <ul>
+          <li>HTL (Sightly) support
+              <ul>
+              <li>syntax validation and highlighting</li>
+              </ul>
+          </li>
+      </ul>
     ]]></description>
 
 	<depends>com.intellij.modules.lang</depends>
