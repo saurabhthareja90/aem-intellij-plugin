@@ -2,7 +2,7 @@
 <idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
 	<id>co.nums.intellij.aem</id>
 	<name>AEM IntelliJ Plugin</name>
-	<version>1.0</version>
+	<version>0.1</version>
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
@@ -15,6 +15,8 @@
           </li>
       </ul>
     ]]></description>
+
+	<idea-version since-build="143"/>
 
 	<depends>com.intellij.modules.lang</depends>
 	<depends optional="true">JavaScript</depends>
