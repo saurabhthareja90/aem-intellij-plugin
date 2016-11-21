@@ -6,7 +6,8 @@
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
-      <h3>Features<h3>
+      Intellij IDEA/WebStorm plugin for Adobe Experience Manager.<br>
+      Features:<br>
       <ul>
           <li>HTL (Sightly) support
               <ul>
@@ -42,6 +43,10 @@
 		<lang.syntaxHighlighterFactory
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.highlighter.HtlSyntaxHighlighterFactory"/>
+
+		<lang.formatter
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.formatter.HtlFormattingModelBuilder"/>
 	</extensions>
 
 </idea-plugin>
