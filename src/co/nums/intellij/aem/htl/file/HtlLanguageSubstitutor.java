@@ -1,5 +1,6 @@
 package co.nums.intellij.aem.htl.file;
 
+import co.nums.intellij.aem.constants.JcrConstants;
 import co.nums.intellij.aem.htl.HtlLanguage;
 import com.intellij.ide.highlighter.HtmlFileType;
 import com.intellij.lang.Language;
@@ -14,11 +15,25 @@ public class HtlLanguageSubstitutor extends LanguageSubstitutor {
 	@Nullable
 	@Override
 	public Language getLanguage(@NotNull VirtualFile file, @NotNull Project project) {
-		// TODO: only files under jcr root should be considered as HTL, it can be also configurable by user
-		if (file.getFileType() == HtmlFileType.INSTANCE) {
+		if (isHtml(file) && isInJcrRootDirectory(file)) {
 			return HtlLanguage.INSTANCE;
 		}
 		return null;
+	}
+
+	private boolean isHtml(@NotNull VirtualFile file) {
+		return file.getFileType() == HtmlFileType.INSTANCE;
+	}
+
+	private boolean isInJcrRootDirectory(@NotNull VirtualFile file) {
+		VirtualFile parent = file.getParent();
+		while (parent != null) {
+			if (JcrConstants.JCR_ROOT_DIRECTORY_NAME.equals(parent.getName())) {
+				return true;
+			}
+			parent = parent.getParent();
+		}
+		return false;
 	}
 
 }
