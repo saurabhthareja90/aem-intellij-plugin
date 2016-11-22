@@ -43,6 +43,8 @@
 		<lang.syntaxHighlighterFactory
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.highlighter.HtlSyntaxHighlighterFactory"/>
+
+		<typedHandler implementation="co.nums.intellij.aem.htl.editor.HtlTypedHandler"/>
 	</extensions>
 
 </idea-plugin>
