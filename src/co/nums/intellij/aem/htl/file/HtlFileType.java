@@ -6,12 +6,13 @@ import co.nums.intellij.aem.htl.icons.HtlIcons;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.fileTypes.TemplateLanguageFileType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.Icon;
 
-public class HtlFileType extends LanguageFileType {
+public class HtlFileType extends LanguageFileType implements TemplateLanguageFileType {
 
 	public static final HtlFileType INSTANCE = new HtlFileType();
 
@@ -35,7 +36,7 @@ public class HtlFileType extends LanguageFileType {
 	@NotNull
 	@Override
 	public String getName() {
-		return "HTL file";
+		return "HTL";
 	}
 
 	@NotNull

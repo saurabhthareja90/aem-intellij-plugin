@@ -1,4 +1,4 @@
-package co.nums.intellij.aem.htl.editor;
+package co.nums.intellij.aem.htl.editor.actions;
 
 import co.nums.intellij.aem.htl.HtlLanguage;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
