@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/karollewandowski/aem-intellij-plugin.svg?branch=master)](https://travis-ci.org/karollewandowski/aem-intellij-plugin)
+
 # AEM IntelliJ Plugin
 
 IntelliJ platform plugin for Adobe Experience Manager. Plugin is compatible with IntelliJ IDEA and WebStorm.
