@@ -46,6 +46,10 @@
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.highlighter.HtlSyntaxHighlighterFactory"/>
 
+		<lang.formatter
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.formatter.HtlFormattingModelBuilder"/>
+
 		<typedHandler implementation="co.nums.intellij.aem.htl.editor.actions.HtlTypedHandler"/>
 		<lang.braceMatcher language="HTL" implementationClass="co.nums.intellij.aem.htl.editor.braces.HtlBraceMatcher"/>
 		<lang.quoteHandler
