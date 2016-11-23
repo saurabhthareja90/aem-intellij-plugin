@@ -33,9 +33,11 @@
 		<lang.fileViewProviderFactory
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.file.HtlFileViewProviderFactory"/>
+		<!--
 		<completion.contributor
 				language="HTML"
 				implementationClass="co.nums.intellij.aem.htl.completion.HtlAttributesCompletionContributor"/>
+		-->
 
 		<iconProvider implementation="co.nums.intellij.aem.htl.file.HtlIconProvider"/>
 		<lang.substitutor language="HTML" implementationClass="co.nums.intellij.aem.htl.file.HtlLanguageSubstitutor"/>
@@ -47,6 +49,12 @@
 		<lang.formatter
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.formatter.HtlFormattingModelBuilder"/>
+
+		<typedHandler implementation="co.nums.intellij.aem.htl.editor.actions.HtlTypedHandler"/>
+		<lang.braceMatcher language="HTL" implementationClass="co.nums.intellij.aem.htl.editor.braces.HtlBraceMatcher"/>
+		<lang.quoteHandler
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.editor.actions.HtlQuoteHandler"/>
 	</extensions>
 
 </idea-plugin>

@@ -162,17 +162,17 @@ class HtlLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\1\2\0\2\1\2\2\1\3\1\4\1\2\1\5"+
-    "\1\2\2\6\1\7\2\5\1\10\1\11\1\12\1\13"+
-    "\1\14\1\15\1\16\1\4\2\2\1\17\1\20\1\21"+
-    "\2\1\1\22\1\23\2\0\1\24\2\0\1\25\3\0"+
-    "\1\6\1\26\2\5\1\27\2\0\1\30\1\31\1\32"+
-    "\1\33\1\34\1\22\4\0\1\26\1\0\2\5\1\35"+
-    "\1\36\1\0\1\1\3\0\1\37\1\5\2\0\1\40"+
+    "\1\1\2\0\2\1\2\2\1\3\1\4\1\5\1\6"+
+    "\1\7\2\10\1\11\2\6\1\12\1\13\1\14\1\15"+
+    "\1\16\1\17\1\20\1\4\2\2\1\21\1\22\1\23"+
+    "\2\1\1\24\1\25\1\0\1\5\1\0\1\7\3\0"+
+    "\1\10\1\26\2\6\1\27\2\0\1\30\1\31\1\32"+
+    "\1\33\1\34\1\24\4\0\1\26\1\0\2\6\1\35"+
+    "\1\36\1\0\1\1\3\0\1\37\1\6\2\0\1\40"+
     "\2\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[78];
+    int [] result = new int[76];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -201,15 +201,15 @@ class HtlLexer implements FlexLexer {
     "\0\u012d\0\u0158\0\u0183\0\u01ae\0\u01d9\0\u0204\0\u022f\0\u025a"+
     "\0\u0285\0\327\0\327\0\327\0\327\0\327\0\u02b0\0\327"+
     "\0\u02db\0\u0306\0\u0331\0\u035c\0\u0387\0\u03b2\0\u03dd\0\u0408"+
-    "\0\u0433\0\327\0\u0158\0\u045e\0\327\0\u01ae\0\u0489\0\327"+
-    "\0\u01d9\0\u022f\0\u04b4\0\u04df\0\u050a\0\u0535\0\u0560\0\327"+
-    "\0\u058b\0\u05b6\0\327\0\327\0\327\0\327\0\327\0\u05e1"+
-    "\0\u0433\0\u060c\0\u0637\0\u0662\0\u068d\0\u068d\0\u06b8\0\u06e3"+
-    "\0\327\0\327\0\u05e1\0\327\0\u070e\0\u0739\0\u0764\0\u0183"+
-    "\0\u078f\0\u07ba\0\u07e5\0\u0183\0\u0810\0\u083b";
+    "\0\u0433\0\327\0\u045e\0\327\0\u0489\0\327\0\u01d9\0\u022f"+
+    "\0\u04b4\0\u04df\0\u050a\0\u0535\0\u0560\0\327\0\u058b\0\u05b6"+
+    "\0\327\0\327\0\327\0\327\0\327\0\u05e1\0\u0433\0\u060c"+
+    "\0\u0637\0\u0662\0\u068d\0\u068d\0\u06b8\0\u06e3\0\327\0\327"+
+    "\0\u05e1\0\327\0\u070e\0\u0739\0\u0764\0\u0183\0\u078f\0\u07ba"+
+    "\0\u07e5\0\u0183\0\u0810\0\u083b";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[78];
+    int [] result = new int[76];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -240,40 +240,40 @@ class HtlLexer implements FlexLexer {
     "\5\6\1\37\1\6\1\37\34\6\1\37\6\6\1\1"+
     "\1\4\1\40\51\1\1\4\1\5\1\41\47\1\56\0"+
     "\1\42\54\0\1\11\1\0\1\11\34\0\1\11\6\0"+
-    "\1\43\1\44\4\43\1\45\1\0\43\43\11\0\3\13"+
-    "\1\0\3\13\1\0\1\13\1\0\12\13\16\0\1\46"+
-    "\1\47\5\46\1\0\4\46\1\50\36\46\15\0\2\51"+
-    "\1\0\1\52\1\53\6\0\1\53\37\0\2\16\1\54"+
-    "\1\52\1\53\6\0\1\53\37\0\2\55\45\0\3\13"+
-    "\1\0\3\13\1\0\1\13\1\0\4\13\1\56\5\13"+
+    "\1\12\1\43\4\12\1\44\1\0\43\12\11\0\3\13"+
+    "\1\0\3\13\1\0\1\13\1\0\12\13\16\0\1\14"+
+    "\1\45\5\14\1\0\4\14\1\46\36\14\15\0\2\47"+
+    "\1\0\1\50\1\51\6\0\1\51\37\0\2\16\1\52"+
+    "\1\50\1\51\6\0\1\51\37\0\2\53\45\0\3\13"+
+    "\1\0\3\13\1\0\1\13\1\0\4\13\1\54\5\13"+
     "\27\0\3\13\1\0\3\13\1\0\1\13\1\0\7\13"+
-    "\1\57\2\13\66\0\1\60\7\0\1\11\1\0\1\11"+
-    "\15\0\1\61\16\0\1\11\1\62\53\0\1\63\53\0"+
-    "\1\64\53\0\1\65\52\0\1\66\52\0\1\67\7\0"+
+    "\1\55\2\13\66\0\1\56\7\0\1\11\1\0\1\11"+
+    "\15\0\1\57\16\0\1\11\1\60\53\0\1\61\53\0"+
+    "\1\62\53\0\1\63\52\0\1\64\52\0\1\65\7\0"+
     "\1\37\1\0\1\37\34\0\1\37\6\0\1\1\1\4"+
-    "\1\5\1\70\47\1\1\71\1\72\51\71\1\0\1\43"+
-    "\4\0\1\43\1\0\1\43\1\73\1\0\1\43\10\0"+
-    "\1\43\1\0\2\43\1\0\1\43\22\0\1\46\6\0"+
-    "\1\46\1\74\1\0\2\46\7\0\1\46\1\0\2\46"+
-    "\1\0\1\46\36\0\2\75\3\0\1\76\45\0\3\54"+
-    "\50\0\2\55\2\0\1\53\6\0\1\53\33\0\1\77"+
+    "\1\5\1\66\47\1\1\67\1\70\51\67\1\0\1\12"+
+    "\4\0\1\12\1\0\1\12\1\71\1\0\1\12\10\0"+
+    "\1\12\1\0\2\12\1\0\1\12\22\0\1\14\6\0"+
+    "\1\14\1\72\1\0\2\14\7\0\1\14\1\0\2\14"+
+    "\1\0\1\14\36\0\2\73\3\0\1\74\45\0\3\52"+
+    "\50\0\2\53\2\0\1\51\6\0\1\51\33\0\1\75"+
     "\2\13\1\0\3\13\1\0\1\13\1\0\12\13\27\0"+
-    "\3\13\1\0\3\13\1\0\1\13\1\0\10\13\1\100"+
-    "\1\13\62\0\1\101\52\0\1\102\6\0\4\103\1\104"+
-    "\46\103\1\71\1\72\1\105\50\71\12\0\2\106\1\0"+
-    "\2\106\2\0\1\106\6\0\3\106\32\0\2\107\1\0"+
-    "\2\107\2\0\1\107\6\0\3\107\35\0\2\75\45\0"+
-    "\3\13\1\0\3\13\1\0\1\13\1\0\5\13\1\110"+
+    "\3\13\1\0\3\13\1\0\1\13\1\0\10\13\1\76"+
+    "\1\13\62\0\1\77\52\0\1\100\6\0\4\101\1\102"+
+    "\46\101\1\67\1\70\1\103\50\67\12\0\2\104\1\0"+
+    "\2\104\2\0\1\104\6\0\3\104\32\0\2\105\1\0"+
+    "\2\105\2\0\1\105\6\0\3\105\35\0\2\73\45\0"+
+    "\3\13\1\0\3\13\1\0\1\13\1\0\5\13\1\106"+
     "\4\13\27\0\3\13\1\0\3\13\1\0\1\13\1\0"+
-    "\11\13\1\111\16\0\1\71\1\72\1\71\1\103\47\71"+
-    "\12\0\2\112\1\0\2\112\2\0\1\112\6\0\3\112"+
-    "\32\0\2\113\1\0\2\113\2\0\1\113\6\0\3\113"+
+    "\11\13\1\107\16\0\1\67\1\70\1\67\1\101\47\67"+
+    "\12\0\2\110\1\0\2\110\2\0\1\110\6\0\3\110"+
+    "\32\0\2\111\1\0\2\111\2\0\1\111\6\0\3\111"+
     "\31\0\3\13\1\0\3\13\1\0\1\13\1\0\5\13"+
-    "\1\114\4\13\30\0\2\115\1\0\2\115\2\0\1\115"+
-    "\6\0\3\115\32\0\2\116\1\0\2\116\2\0\1\116"+
-    "\6\0\3\116\32\0\2\43\1\0\2\43\2\0\1\43"+
-    "\6\0\3\43\32\0\2\46\1\0\2\46\2\0\1\46"+
-    "\6\0\3\46\20\0";
+    "\1\112\4\13\30\0\2\113\1\0\2\113\2\0\1\113"+
+    "\6\0\3\113\32\0\2\114\1\0\2\114\2\0\1\114"+
+    "\6\0\3\114\32\0\2\12\1\0\2\12\2\0\1\12"+
+    "\6\0\3\12\32\0\2\14\1\0\2\14\2\0\1\14"+
+    "\6\0\3\14\20\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[2150];
@@ -315,13 +315,13 @@ class HtlLexer implements FlexLexer {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\1\2\0\2\1\1\11\1\1\1\11\11\1\5\11"+
-    "\1\1\1\11\11\1\1\11\2\0\1\11\2\0\1\11"+
+    "\1\1\1\11\11\1\1\11\1\0\1\11\1\0\1\11"+
     "\3\0\4\1\1\11\2\0\5\11\1\1\4\0\1\1"+
     "\1\0\2\1\2\11\1\0\1\11\3\0\2\1\2\0"+
     "\1\1\2\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[78];
+    int [] result = new int[76];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -638,75 +638,75 @@ class HtlLexer implements FlexLexer {
             }
           case 36: break;
           case 5: 
-            { return HtlTokenTypes.IDENTIFIER;
+            { return HtlTokenTypes.SINGLE_QUOTED_STRING;
             }
           case 37: break;
           case 6: 
-            { return HtlTokenTypes.INTEGER_NUMBER;
+            { return HtlTokenTypes.IDENTIFIER;
             }
           case 38: break;
           case 7: 
-            { return HtlTokenTypes.DOT;
+            { return HtlTokenTypes.DOUBLE_QUOTED_STRING;
             }
           case 39: break;
           case 8: 
-            { return HtlTokenTypes.LEFT_PARENTH;
+            { return HtlTokenTypes.INTEGER_NUMBER;
             }
           case 40: break;
           case 9: 
-            { return HtlTokenTypes.RIGHT_PARENTH;
+            { return HtlTokenTypes.DOT;
             }
           case 41: break;
           case 10: 
-            { return HtlTokenTypes.LEFT_BRACKET;
+            { return HtlTokenTypes.LEFT_PARENTH;
             }
           case 42: break;
           case 11: 
-            { return HtlTokenTypes.RIGHT_BRACKET;
+            { return HtlTokenTypes.RIGHT_PARENTH;
             }
           case 43: break;
           case 12: 
-            { return HtlTokenTypes.COMMA;
+            { return HtlTokenTypes.LEFT_BRACKET;
             }
           case 44: break;
           case 13: 
-            { return HtlTokenTypes.NOT;
+            { return HtlTokenTypes.RIGHT_BRACKET;
             }
           case 45: break;
           case 14: 
-            { return HtlTokenTypes.OPTIONS_SEPARATOR;
+            { return HtlTokenTypes.COMMA;
             }
           case 46: break;
           case 15: 
-            { return HtlTokenTypes.ASSIGN;
+            { return HtlTokenTypes.NOT;
             }
           case 47: break;
           case 16: 
-            { return HtlTokenTypes.LT;
+            { return HtlTokenTypes.OPTIONS_SEPARATOR;
             }
           case 48: break;
           case 17: 
-            { return HtlTokenTypes.GT;
+            { return HtlTokenTypes.ASSIGN;
             }
           case 49: break;
           case 18: 
-            { yypushback(2);
-            yybegin(EXPRESSION);
-            if (yylength() > 0) {
-                return HtlTokenTypes.HTML_FRAGMENT;
-            }
+            { return HtlTokenTypes.LT;
             }
           case 50: break;
           case 19: 
-            { return HtlTokenTypes.EXPR_START;
+            { return HtlTokenTypes.GT;
             }
           case 51: break;
           case 20: 
-            { return HtlTokenTypes.SINGLE_QUOTED_STRING;
+            { yypushback(2); // get back before ${
+                                   yybegin(EXPRESSION);
+                                   if (yylength() > 0) {
+                                       return HtlTokenTypes.HTML_FRAGMENT;
+                                   }
             }
           case 52: break;
           case 21: 
-            { return HtlTokenTypes.DOUBLE_QUOTED_STRING;
+            { return HtlTokenTypes.EXPR_START;
             }
           case 53: break;
           case 22: 
