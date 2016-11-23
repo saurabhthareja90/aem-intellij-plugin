@@ -2,20 +2,27 @@
 <idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
 	<id>co.nums.intellij.aem</id>
 	<name>AEM IntelliJ Plugin</name>
-	<version>0.1</version>
+	<version>0.2</version>
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
       Intellij IDEA/WebStorm plugin for Adobe Experience Manager.<br>
       Features:<br>
       <ul>
-          <li>HTL (Sightly) support
+          <li>HTL (Sightly) support [only for HTML files under 'jcr_root' directory]
               <ul>
               <li>syntax validation and highlighting</li>
               </ul>
           </li>
       </ul>
     ]]></description>
+
+	<change-notes><![CDATA[
+		<ul>
+			<li>Improved typing experience (autocomplete parentheses, brackets, quotes, etc.)</li>
+			<li>HTML content formatting</li>
+		</ul>
+	]]></change-notes>
 
 	<idea-version since-build="143"/>
 
