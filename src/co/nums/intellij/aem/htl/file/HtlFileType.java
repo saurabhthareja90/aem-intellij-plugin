@@ -53,7 +53,7 @@ public class HtlFileType extends LanguageFileType implements TemplateLanguageFil
 
 	@Override
 	public Icon getIcon() {
-		return HtlIcons.HTL;
+		return HtlIcons.HTL_FILE;
 	}
 
 }

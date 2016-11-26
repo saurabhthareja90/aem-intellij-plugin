@@ -9,7 +9,7 @@
       Intellij IDEA/WebStorm plugin for Adobe Experience Manager.<br>
       Features:<br>
       <ul>
-          <li>HTL (Sightly) support [only for HTML files under 'jcr_root' directory]
+          <li>HTL/Sightly support (only for HTML files under 'jcr_root' directory)
               <ul>
               <li>syntax validation and highlighting</li>
               </ul>
@@ -40,11 +40,9 @@
 		<lang.fileViewProviderFactory
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.file.HtlFileViewProviderFactory"/>
-		<!--
 		<completion.contributor
 				language="HTML"
-				implementationClass="co.nums.intellij.aem.htl.completion.HtlAttributesCompletionContributor"/>
-		-->
+				implementationClass="co.nums.intellij.aem.htl.completion.contributor.HtlBlocksCompletionContributor"/>
 
 		<iconProvider implementation="co.nums.intellij.aem.htl.file.HtlIconProvider"/>
 		<lang.substitutor language="HTML" implementationClass="co.nums.intellij.aem.htl.file.HtlLanguageSubstitutor"/>
