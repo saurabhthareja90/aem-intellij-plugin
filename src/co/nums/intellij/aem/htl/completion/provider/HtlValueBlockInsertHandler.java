@@ -34,13 +34,13 @@ public abstract class HtlValueBlockInsertHandler implements InsertHandler<Lookup
 		Editor editor = context.getEditor();
 		Document document = editor.getDocument();
 		int caretOffset = editor.getCaretModel().getOffset();
-		if (!hasQuotes(document, caretOffset)) {
+		if (!hasBlockValue(document, caretOffset)) {
 			insertBlockValue(context, document, caretOffset);
-			moveCaret(editor, caretOffset);
+			moveCaretToBlockValue(editor, caretOffset);
 		}
 	}
 
-	private static boolean hasQuotes(Document document, int caretOffset) {
+	private static boolean hasBlockValue(Document document, int caretOffset) {
 		CharSequence chars = document.getCharsSequence();
 		return CharArrayUtil.regionMatches(chars, caretOffset, "=\"")
 				|| CharArrayUtil.regionMatches(chars, caretOffset, "='");
@@ -60,7 +60,7 @@ public abstract class HtlValueBlockInsertHandler implements InsertHandler<Lookup
 		}
 	}
 
-	private void moveCaret(Editor editor, int caretOffset) {
+	private void moveCaretToBlockValue(Editor editor, int caretOffset) {
 		editor.getCaretModel().moveToOffset(caretOffset + getInsertionOffset());
 		editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 		editor.getSelectionModel().removeSelection();
