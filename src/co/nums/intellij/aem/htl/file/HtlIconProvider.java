@@ -16,7 +16,7 @@ public class HtlIconProvider extends IconProvider {
   @Override
   public Icon getIcon(@NotNull PsiElement element, @Iconable.IconFlags int flags) {
     if (element instanceof HtlFile) {
-      return HtlIcons.HTL;
+      return HtlIcons.HTL_FILE;
     }
     return null;
   }
