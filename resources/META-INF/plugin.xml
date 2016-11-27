@@ -12,6 +12,7 @@
           <li>HTL (Sightly) support [only for HTML files under 'jcr_root' directory]
               <ul>
               <li>syntax validation and highlighting</li>
+              <li>HTL block attributes completion (data-sly-*)</li>
               </ul>
           </li>
       </ul>
@@ -19,8 +20,7 @@
 
 	<change-notes><![CDATA[
 		<ul>
-			<li>Improved typing experience (autocomplete parentheses, brackets, quotes, etc.)</li>
-			<li>HTML content formatting</li>
+			<li>HTL block attributes completion (data-sly-*)</li>
 		</ul>
 	]]></change-notes>
 
