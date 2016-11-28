@@ -1,6 +1,6 @@
 package co.nums.intellij.aem.htl.completion.provider;
 
-public class HtlExpressionBlockInsertHandler extends HtlValueBlockInsertHandler {
+class HtlExpressionBlockInsertHandler extends HtlValueBlockInsertHandler {
 
 	public static final HtlExpressionBlockInsertHandler INSTANCE = new HtlExpressionBlockInsertHandler();
 

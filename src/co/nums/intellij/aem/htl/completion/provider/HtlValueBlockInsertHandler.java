@@ -11,7 +11,7 @@ import com.intellij.util.text.CharArrayUtil;
 /**
  * Base for HTL blocks that will likely define value.
  */
-public abstract class HtlValueBlockInsertHandler implements InsertHandler<LookupElement> {
+abstract class HtlValueBlockInsertHandler implements InsertHandler<LookupElement> {
 
 	/**
 	 * Text to insert after HTL block name, eg.

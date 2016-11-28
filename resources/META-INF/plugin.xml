@@ -12,7 +12,8 @@
           <li>HTL/Sightly support (only for HTML files under 'jcr_root' directory)
               <ul>
               <li>syntax validation and highlighting</li>
-              <li>HTL block attributes completion (data-sly-*)</li>
+              <li>block attributes autocompletion (data-sly-*)</li>
+			  <li>expression options autocompletion</li>
               </ul>
           </li>
       </ul>
@@ -20,7 +21,8 @@
 
 	<change-notes><![CDATA[
 		<ul>
-			<li>HTL block attributes completion (data-sly-*)</li>
+			<li>HTL block attributes autocompletion (data-sly-*)</li>
+			<li>HTL expression options autocompletion</li>
 		</ul>
 	]]></change-notes>
 
@@ -40,6 +42,9 @@
 		<lang.fileViewProviderFactory
 				language="HTL"
 				implementationClass="co.nums.intellij.aem.htl.file.HtlFileViewProviderFactory"/>
+		<completion.contributor
+				language="HTL"
+				implementationClass="co.nums.intellij.aem.htl.completion.contributor.HtlExpressionOptionsCompletionContributor"/>
 		<completion.contributor
 				language="HTML"
 				implementationClass="co.nums.intellij.aem.htl.completion.contributor.HtlBlocksCompletionContributor"/>
