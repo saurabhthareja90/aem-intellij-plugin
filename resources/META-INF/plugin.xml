@@ -2,7 +2,7 @@
 <idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
 	<id>co.nums.intellij.aem</id>
 	<name>AEM IntelliJ Plugin</name>
-	<version>0.2</version>
+	<version>0.3</version>
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
@@ -12,8 +12,7 @@
           <li>HTL/Sightly support (only for HTML files under 'jcr_root' directory)
               <ul>
               <li>syntax validation and highlighting</li>
-              <li>block attributes autocompletion (data-sly-*)</li>
-			  <li>expression options autocompletion</li>
+              <li>autocompletion for block attributes (data-sly-*), expression options and display contexts</li>
               </ul>
           </li>
       </ul>
@@ -21,8 +20,7 @@
 
 	<change-notes><![CDATA[
 		<ul>
-			<li>HTL block attributes autocompletion (data-sly-*)</li>
-			<li>HTL expression options autocompletion</li>
+            <li>autocompletion for block attributes (data-sly-*), expression options and display contexts</li>
 		</ul>
 	]]></change-notes>
 
@@ -61,10 +59,8 @@
 				implementationClass="co.nums.intellij.aem.htl.formatter.HtlFormattingModelBuilder"/>
 
 		<typedHandler implementation="co.nums.intellij.aem.htl.editor.actions.HtlTypedHandler"/>
+		<quoteHandler fileType="HTL" className="co.nums.intellij.aem.htl.editor.actions.HtlQuoteHandler"/>
 		<lang.braceMatcher language="HTL" implementationClass="co.nums.intellij.aem.htl.editor.braces.HtlBraceMatcher"/>
-		<lang.quoteHandler
-				language="HTL"
-				implementationClass="co.nums.intellij.aem.htl.editor.actions.HtlQuoteHandler"/>
 	</extensions>
 
 </idea-plugin>
