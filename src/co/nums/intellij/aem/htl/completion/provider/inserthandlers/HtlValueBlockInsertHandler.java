@@ -1,4 +1,4 @@
-package co.nums.intellij.aem.htl.completion.provider;
+package co.nums.intellij.aem.htl.completion.provider.inserthandlers;
 
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
@@ -13,21 +13,22 @@ import com.intellij.util.text.CharArrayUtil;
  */
 public abstract class HtlValueBlockInsertHandler implements InsertHandler<LookupElement> {
 
-	/**
-	 * Text to insert after HTL block name, eg.
-	 * {@code ="${}"} in {@code data-sly-test="${}"} or
-	 * {@code =""} in {@code data-sly-use=""}
-	 *
-	 * @return insertion text
-	 */
-	protected abstract String getInsertionString();
+	private final String insertionString;
+
+	private final int insertionCaretOffset;
 
 	/**
-	 * Offset that caret should be scrolled to after text insertion.
-	 *
-	 * @return caret offset after insertion
+	 * @param insertionString
+	 * 		text to insert after HTL block name, eg.
+	 * 		{@code ="${}"} in {@code data-sly-test="${}"} or
+	 * 		{@code =""} in {@code data-sly-use=""}
+	 * @param insertionCaretOffset
+	 * 		offset that caret should be moved to after string insertion
 	 */
-	protected abstract int getInsertionOffset();
+	HtlValueBlockInsertHandler(String insertionString, int insertionCaretOffset) {
+		this.insertionString = insertionString;
+		this.insertionCaretOffset = insertionCaretOffset;
+	}
 
 	@Override
 	public void handleInsert(InsertionContext context, LookupElement item) {
@@ -49,19 +50,19 @@ public abstract class HtlValueBlockInsertHandler implements InsertHandler<Lookup
 	private void insertBlockValue(InsertionContext context, Document document, int caretOffset) {
 		// check if HTL works when expression contains the same type of quote
 		// as attribute value delimiter if not, then handle it here
-		String insertionString = getInsertionString();
+		String toInsert = insertionString;
 		if (caretOffset >= document.getTextLength()
 				|| "/> \n\t\r".indexOf(document.getCharsSequence().charAt(caretOffset)) < 0) {
-			insertionString += " "; // it's copied from IDEA community, what is it for?
+			toInsert += " "; // it's copied from IDEA community, what is it for?
 		}
-		document.insertString(caretOffset, insertionString);
+		document.insertString(caretOffset, toInsert);
 		if (context.getCompletionChar() == '=') {
 			context.setAddCompletionChar(false); // IDEA-19449
 		}
 	}
 
 	private void moveCaretToBlockValue(Editor editor, int caretOffset) {
-		editor.getCaretModel().moveToOffset(caretOffset + getInsertionOffset());
+		editor.getCaretModel().moveToOffset(caretOffset + insertionCaretOffset);
 		editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 		editor.getSelectionModel().removeSelection();
 	}
