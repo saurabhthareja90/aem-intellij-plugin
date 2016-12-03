@@ -12,12 +12,13 @@ import javax.swing.Icon;
 
 public class HtlIconProvider extends IconProvider {
 
-  @Nullable
-  @Override
-  public Icon getIcon(@NotNull PsiElement element, @Iconable.IconFlags int flags) {
-    if (element instanceof HtlFile) {
-      return HtlIcons.HTL_FILE;
-    }
-    return null;
-  }
+	@Nullable
+	@Override
+	public Icon getIcon(@NotNull PsiElement element, @Iconable.IconFlags int flags) {
+		if (element instanceof HtlFile) {
+			return HtlIcons.HTL_FILE;
+		}
+		return null;
+	}
+
 }

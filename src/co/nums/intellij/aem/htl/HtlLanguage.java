@@ -22,7 +22,6 @@ public class HtlLanguage extends Language implements TemplateLanguage {
 		super(baseLanguage, id, mimeTypes);
 	}
 
-	@SuppressWarnings("SameReturnValue") // ideally this would be public static, but the static inits in the tests get cranky when we do that
 	public static LanguageFileType getDefaultTemplateLang() {
 		return StdFileTypes.HTML;
 	}

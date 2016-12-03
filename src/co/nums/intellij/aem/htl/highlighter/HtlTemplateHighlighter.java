@@ -28,7 +28,8 @@ public class HtlTemplateHighlighter extends LayeredLexerEditorHighlighter {
 		registerLayer(HtlTokenTypes.HTML_FRAGMENT, new LayerDescriptor(outerLanguageHighlighter, ""));
 	}
 
-	private SyntaxHighlighter getOuterSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+	private static SyntaxHighlighter getOuterSyntaxHighlighter(@Nullable Project project,
+			@Nullable VirtualFile virtualFile) {
 		FileType type = null;
 		if (project == null || virtualFile == null) {
 			type = StdFileTypes.PLAIN_TEXT;

@@ -32,7 +32,7 @@ public class HtlExpressionOptionQuotesInsertHandler implements InsertHandler<Loo
 				|| CharArrayUtil.regionMatches(chars, caretOffset, "='");
 	}
 
-	private void insertQuotes(InsertionContext context, Document document, int caretOffset) {
+	private static void insertQuotes(InsertionContext context, Document document, int caretOffset) {
 		// check if HTL works when expression contains the same type of quote
 		// as attribute value delimiter if not, then handle it here
 		document.insertString(caretOffset, "=''");
@@ -41,7 +41,7 @@ public class HtlExpressionOptionQuotesInsertHandler implements InsertHandler<Loo
 		}
 	}
 
-	private void moveCaretIntoQuotes(Editor editor, int caretOffset) {
+	private static void moveCaretIntoQuotes(Editor editor, int caretOffset) {
 		editor.getCaretModel().moveToOffset(caretOffset + 2);
 		editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 		editor.getSelectionModel().removeSelection();

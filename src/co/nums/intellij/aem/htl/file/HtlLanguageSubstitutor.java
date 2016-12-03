@@ -21,11 +21,11 @@ public class HtlLanguageSubstitutor extends LanguageSubstitutor {
 		return null;
 	}
 
-	private boolean isHtml(@NotNull VirtualFile file) {
+	private static boolean isHtml(@NotNull VirtualFile file) {
 		return file.getFileType() == HtmlFileType.INSTANCE;
 	}
 
-	private boolean isInJcrRootDirectory(@NotNull VirtualFile file) {
+	private static boolean isInJcrRootDirectory(@NotNull VirtualFile file) {
 		VirtualFile parent = file.getParent();
 		while (parent != null) {
 			if (JcrConstants.JCR_ROOT_DIRECTORY_NAME.equals(parent.getName())) {

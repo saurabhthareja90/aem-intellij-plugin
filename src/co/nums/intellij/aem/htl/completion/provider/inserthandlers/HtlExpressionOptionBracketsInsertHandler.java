@@ -28,7 +28,7 @@ public class HtlExpressionOptionBracketsInsertHandler implements InsertHandler<L
 		return CharArrayUtil.regionMatches(chars, caretOffset, "=[");
 	}
 
-	private void insertBrackets(InsertionContext context, Document document, int caretOffset) {
+	private static void insertBrackets(InsertionContext context, Document document, int caretOffset) {
 		// check if HTL works when expression contains the same type of quote
 		// as attribute value delimiter if not, then handle it here
 		document.insertString(caretOffset, "=[]");
@@ -37,7 +37,7 @@ public class HtlExpressionOptionBracketsInsertHandler implements InsertHandler<L
 		}
 	}
 
-	private void moveCaretIntoBrackets(Editor editor, int caretOffset) {
+	private static void moveCaretIntoBrackets(Editor editor, int caretOffset) {
 		editor.getCaretModel().moveToOffset(caretOffset + 2);
 		editor.getScrollingModel().scrollToCaret(ScrollType.RELATIVE);
 		editor.getSelectionModel().removeSelection();

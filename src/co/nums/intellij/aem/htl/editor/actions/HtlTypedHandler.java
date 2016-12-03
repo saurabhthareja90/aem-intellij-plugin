@@ -46,7 +46,7 @@ public class HtlTypedHandler extends TypedHandlerDelegate {
 		return Result.CONTINUE;
 	}
 
-	private boolean isHtl(@NotNull PsiFile file) {
+	private static boolean isHtl(@NotNull PsiFile file) {
 		FileViewProvider provider = file.getViewProvider();
 		return provider.getBaseLanguage().isKindOf(HtlLanguage.INSTANCE);
 	}
