@@ -2,7 +2,7 @@
 
 # AEM IntelliJ Plugin
 
-IntelliJ platform plugin for Adobe Experience Manager. Plugin is compatible with IntelliJ IDEA and WebStorm.
+IntelliJ platform plugin for Adobe Experience Manager. Plugin is compatible with all IntelliJ Platform products.
 
 Project is in early development stage. **Reporting issues is highly appreciated**.
 
@@ -13,10 +13,11 @@ New features will be added systematically. Work progress and planned features ca
 
 Plugin can be installed from JetBrains plugins repository:
 
-Go to: _Preferences / Plugins / Browse Repositories..._ and search for `AEM IntelliJ Plugin`.
+Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM IntelliJ Plugin`.
 
 
 ## Features
 
-* HTL (Sightly) support
+* HTL/Sightly support (only for HTML files under 'jcr_root' directory)
   * syntax validation and highlighting
+  * autocompletion for block attributes (`data-sly-*`), built-in expression options and display contexts

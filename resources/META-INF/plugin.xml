@@ -6,7 +6,7 @@
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
-      Intellij IDEA/WebStorm plugin for Adobe Experience Manager.<br>
+      Intellij Platform plugin for Adobe Experience Manager.<br>
       Features:<br>
       <ul>
           <li>HTL/Sightly support (only for HTML files under 'jcr_root' directory)
