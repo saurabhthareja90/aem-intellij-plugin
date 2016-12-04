@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.ex.util.LayeredLexerEditorHighlighter;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
@@ -30,20 +31,19 @@ public class HtlTemplateHighlighter extends LayeredLexerEditorHighlighter {
 
 	private static SyntaxHighlighter getOuterSyntaxHighlighter(@Nullable Project project,
 			@Nullable VirtualFile virtualFile) {
-		FileType type = null;
+		FileType fileType = null;
 		if (project == null || virtualFile == null) {
-			type = StdFileTypes.PLAIN_TEXT;
+			fileType = StdFileTypes.PLAIN_TEXT;
 		} else {
 			Language language = TemplateDataLanguageMappings.getInstance(project).getMapping(virtualFile);
 			if (language != null) {
-				type = language.getAssociatedFileType();
+				fileType = language.getAssociatedFileType();
 			}
-			if (type == null) {
-				type = HtlLanguage.getDefaultTemplateLang();
+			if (fileType == null) {
+				fileType = HtlLanguage.getDefaultTemplateLang();
 			}
 		}
-		// TODO: deprecated in IDEA 12, still needed in IDEA 11, remove when IDEA 11 support is dropped
-		return SyntaxHighlighter.PROVIDER.create(type, project, virtualFile);
+		return SyntaxHighlighterFactory.getSyntaxHighlighter(fileType, project, virtualFile);
 	}
 
 }
