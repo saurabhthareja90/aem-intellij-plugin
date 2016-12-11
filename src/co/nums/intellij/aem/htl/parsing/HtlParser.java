@@ -1,15 +1,70 @@
 // This is a generated file. Not intended for manual editing.
 package co.nums.intellij.aem.htl.parsing;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.LightPsiParser;
+import com.intellij.psi.tree.IElementType;
+
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.AND;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.ASSIGN;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.ATOM;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.BINARY_OP;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.BOOLEAN_FALSE;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.BOOLEAN_TRUE;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.COMMA;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.COMPARISON_OP;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.COMPARISON_TERM;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.DOT;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.DOUBLE_QUOTED_STRING;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.EQ;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.ESC_EXPR;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.EXPRESSION;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.EXPR_END;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.EXPR_NODE;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.EXPR_START;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.FACTOR;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.FIELD;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.FLOAT_NUMBER;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.GEQ;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.GT;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.HTML_FRAGMENT;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.IDENTIFIER;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.INTEGER_NUMBER;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.LEFT_BRACKET;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.LEFT_PARENTH;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.LEQ;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.LT;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.NEQ;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.NOT;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.OPERATOR;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.OPTION;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.OPTIONS_SEPARATOR;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.OPTION_LIST;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.OR;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.RIGHT_BRACKET;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.RIGHT_PARENTH;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.SIMPLE;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.SINGLE_QUOTED_STRING;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.STRING_LITERAL;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.TERM;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.TERNARY_BRANCHES_OP;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.TERNARY_QUESTION_OP;
+import static co.nums.intellij.aem.htl.psi.HtlTokenTypes.VALUE_LIST;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.TRUE_CONDITION;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._COLLAPSE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase._NONE_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.adapt_builder_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.current_position_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.empty_element_parsed_guard_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.enter_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.exit_section_;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.nextTokenIs;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.parseTokens;
+import static com.intellij.lang.parser.GeneratedParserUtilBase.recursion_guard_;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class HtlParser implements PsiParser, LightPsiParser {
@@ -27,16 +82,16 @@ public class HtlParser implements PsiParser, LightPsiParser {
       r = atom(b, 0);
     }
     else if (t == BINARY_OP) {
-      r = binaryOp(b, 0);
+      r = binary_op(b, 0);
     }
     else if (t == COMPARISON_OP) {
-      r = comparisonOp(b, 0);
+      r = comparison_op(b, 0);
     }
     else if (t == COMPARISON_TERM) {
-      r = comparisonTerm(b, 0);
+      r = comparison_term(b, 0);
     }
     else if (t == EXPR_NODE) {
-      r = exprNode(b, 0);
+      r = expr_node(b, 0);
     }
     else if (t == EXPRESSION) {
       r = expression(b, 0);
@@ -54,7 +109,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
       r = option(b, 0);
     }
     else if (t == OPTION_LIST) {
-      r = optionList(b, 0);
+      r = option_list(b, 0);
     }
     else if (t == SIMPLE) {
       r = simple(b, 0);
@@ -65,11 +120,8 @@ public class HtlParser implements PsiParser, LightPsiParser {
     else if (t == TERM) {
       r = term(b, 0);
     }
-    else if (t == TEXT_FRAGMENT) {
-      r = textFragment(b, 0);
-    }
     else if (t == VALUE_LIST) {
-      r = valueList(b, 0);
+      r = value_list(b, 0);
     }
     else {
       r = parse_root_(t, b, 0);
@@ -83,54 +135,54 @@ public class HtlParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // IDENTIFIER
-  //      | string_literal
   //      | INTEGER_NUMBER
   //      | FLOAT_NUMBER
+  //      | string_literal
   //      | boolean_constant
   public static boolean atom(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "atom")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ATOM, "<atom>");
     r = consumeToken(b, IDENTIFIER);
-    if (!r) r = string_literal(b, l + 1);
     if (!r) r = consumeToken(b, INTEGER_NUMBER);
     if (!r) r = consumeToken(b, FLOAT_NUMBER);
+    if (!r) r = string_literal(b, l + 1);
     if (!r) r = boolean_constant(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // comparisonTerm (operator comparisonTerm)*
-  public static boolean binaryOp(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "binaryOp")) return false;
+  // comparison_term (operator comparison_term)*
+  public static boolean binary_op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "binary_op")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, BINARY_OP, "<binary op>");
-    r = comparisonTerm(b, l + 1);
-    r = r && binaryOp_1(b, l + 1);
+    r = comparison_term(b, l + 1);
+    r = r && binary_op_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (operator comparisonTerm)*
-  private static boolean binaryOp_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "binaryOp_1")) return false;
+  // (operator comparison_term)*
+  private static boolean binary_op_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "binary_op_1")) return false;
     int c = current_position_(b);
     while (true) {
-      if (!binaryOp_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "binaryOp_1", c)) break;
+      if (!binary_op_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "binary_op_1", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
-  // operator comparisonTerm
-  private static boolean binaryOp_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "binaryOp_1_0")) return false;
+  // operator comparison_term
+  private static boolean binary_op_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "binary_op_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = operator(b, l + 1);
-    r = r && comparisonTerm(b, l + 1);
+    r = r && comparison_term(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -155,8 +207,8 @@ public class HtlParser implements PsiParser, LightPsiParser {
   //                | '<='
   //                | '=='
   //                | '!='
-  public static boolean comparisonOp(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comparisonOp")) return false;
+  public static boolean comparison_op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comparison_op")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, COMPARISON_OP, "<comparison op>");
     r = consumeToken(b, GT);
@@ -170,69 +222,69 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // factor [comparisonOp factor]
-  public static boolean comparisonTerm(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comparisonTerm")) return false;
+  // factor [comparison_op factor]
+  public static boolean comparison_term(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comparison_term")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, COMPARISON_TERM, "<comparison term>");
     r = factor(b, l + 1);
-    r = r && comparisonTerm_1(b, l + 1);
+    r = r && comparison_term_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // [comparisonOp factor]
-  private static boolean comparisonTerm_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comparisonTerm_1")) return false;
-    comparisonTerm_1_0(b, l + 1);
+  // [comparison_op factor]
+  private static boolean comparison_term_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comparison_term_1")) return false;
+    comparison_term_1_0(b, l + 1);
     return true;
   }
 
-  // comparisonOp factor
-  private static boolean comparisonTerm_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "comparisonTerm_1_0")) return false;
+  // comparison_op factor
+  private static boolean comparison_term_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comparison_term_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = comparisonOp(b, l + 1);
+    r = comparison_op(b, l + 1);
     r = r && factor(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // binaryOp [TERNARY_QUESTION_OP binaryOp TERNARY_BRANCHES_OP binaryOp]
-  public static boolean exprNode(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprNode")) return false;
+  // binary_op [TERNARY_QUESTION_OP binary_op TERNARY_BRANCHES_OP binary_op]
+  public static boolean expr_node(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_node")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EXPR_NODE, "<expr node>");
-    r = binaryOp(b, l + 1);
-    r = r && exprNode_1(b, l + 1);
+    r = binary_op(b, l + 1);
+    r = r && expr_node_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // [TERNARY_QUESTION_OP binaryOp TERNARY_BRANCHES_OP binaryOp]
-  private static boolean exprNode_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprNode_1")) return false;
-    exprNode_1_0(b, l + 1);
+  // [TERNARY_QUESTION_OP binary_op TERNARY_BRANCHES_OP binary_op]
+  private static boolean expr_node_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_node_1")) return false;
+    expr_node_1_0(b, l + 1);
     return true;
   }
 
-  // TERNARY_QUESTION_OP binaryOp TERNARY_BRANCHES_OP binaryOp
-  private static boolean exprNode_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "exprNode_1_0")) return false;
+  // TERNARY_QUESTION_OP binary_op TERNARY_BRANCHES_OP binary_op
+  private static boolean expr_node_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_node_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, TERNARY_QUESTION_OP);
-    r = r && binaryOp(b, l + 1);
+    r = r && binary_op(b, l + 1);
     r = r && consumeToken(b, TERNARY_BRANCHES_OP);
-    r = r && binaryOp(b, l + 1);
+    r = r && binary_op(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // '${' exprNode? ['@' optionList] '}'
+  // '${' expr_node? ['@' option_list] '}'
   public static boolean expression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression")) return false;
     if (!nextTokenIs(b, EXPR_START)) return false;
@@ -246,27 +298,27 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // exprNode?
+  // expr_node?
   private static boolean expression_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression_1")) return false;
-    exprNode(b, l + 1);
+    expr_node(b, l + 1);
     return true;
   }
 
-  // ['@' optionList]
+  // ['@' option_list]
   private static boolean expression_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression_2")) return false;
     expression_2_0(b, l + 1);
     return true;
   }
 
-  // '@' optionList
+  // '@' option_list
   private static boolean expression_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expression_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, OPTIONS_SEPARATOR);
-    r = r && optionList(b, l + 1);
+    r = r && option_list(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -308,7 +360,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (expression | textFragment)*
+  // (expression | text_fragment)*
   static boolean interpolation(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "interpolation")) return false;
     int c = current_position_(b);
@@ -320,13 +372,13 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // expression | textFragment
+  // expression | text_fragment
   private static boolean interpolation_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "interpolation_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = expression(b, l + 1);
-    if (!r) r = textFragment(b, l + 1);
+    if (!r) r = text_fragment(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -346,7 +398,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER ['=' exprNode]
+  // IDENTIFIER ['=' expr_node]
   public static boolean option(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "option")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
@@ -358,52 +410,52 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ['=' exprNode]
+  // ['=' expr_node]
   private static boolean option_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "option_1")) return false;
     option_1_0(b, l + 1);
     return true;
   }
 
-  // '=' exprNode
+  // '=' expr_node
   private static boolean option_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "option_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ASSIGN);
-    r = r && exprNode(b, l + 1);
+    r = r && expr_node(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
   // option (',' option)*
-  public static boolean optionList(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "optionList")) return false;
+  public static boolean option_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "option_list")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = option(b, l + 1);
-    r = r && optionList_1(b, l + 1);
+    r = r && option_list_1(b, l + 1);
     exit_section_(b, m, OPTION_LIST, r);
     return r;
   }
 
   // (',' option)*
-  private static boolean optionList_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "optionList_1")) return false;
+  private static boolean option_list_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "option_list_1")) return false;
     int c = current_position_(b);
     while (true) {
-      if (!optionList_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "optionList_1", c)) break;
+      if (!option_list_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "option_list_1", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
   // ',' option
-  private static boolean optionList_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "optionList_1_0")) return false;
+  private static boolean option_list_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "option_list_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
@@ -414,8 +466,8 @@ public class HtlParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // atom
-  //          | '(' exprNode ')'
-  //          | '[' valueList ']'
+  //          | '(' expr_node ')'
+  //          | '[' value_list ']'
   //          | '[' ']'
   public static boolean simple(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simple")) return false;
@@ -424,41 +476,30 @@ public class HtlParser implements PsiParser, LightPsiParser {
     r = atom(b, l + 1);
     if (!r) r = simple_1(b, l + 1);
     if (!r) r = simple_2(b, l + 1);
-    if (!r) r = simple_3(b, l + 1);
+    if (!r) r = parseTokens(b, 0, LEFT_BRACKET, RIGHT_BRACKET);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // '(' exprNode ')'
+  // '(' expr_node ')'
   private static boolean simple_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simple_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LEFT_PARENTH);
-    r = r && exprNode(b, l + 1);
+    r = r && expr_node(b, l + 1);
     r = r && consumeToken(b, RIGHT_PARENTH);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // '[' valueList ']'
+  // '[' value_list ']'
   private static boolean simple_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simple_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LEFT_BRACKET);
-    r = r && valueList(b, l + 1);
-    r = r && consumeToken(b, RIGHT_BRACKET);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '[' ']'
-  private static boolean simple_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "simple_3")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, LEFT_BRACKET);
+    r = r && value_list(b, l + 1);
     r = r && consumeToken(b, RIGHT_BRACKET);
     exit_section_(b, m, null, r);
     return r;
@@ -478,7 +519,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // simple ('[' exprNode ']' | '.' field)*
+  // simple ('[' expr_node ']' | '.' field)*
   public static boolean term(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term")) return false;
     boolean r;
@@ -489,7 +530,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ('[' exprNode ']' | '.' field)*
+  // ('[' expr_node ']' | '.' field)*
   private static boolean term_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term_1")) return false;
     int c = current_position_(b);
@@ -501,7 +542,7 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // '[' exprNode ']' | '.' field
+  // '[' expr_node ']' | '.' field
   private static boolean term_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term_1_0")) return false;
     boolean r;
@@ -512,13 +553,13 @@ public class HtlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // '[' exprNode ']'
+  // '[' expr_node ']'
   private static boolean term_1_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "term_1_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LEFT_BRACKET);
-    r = r && exprNode(b, l + 1);
+    r = r && expr_node(b, l + 1);
     r = r && consumeToken(b, RIGHT_BRACKET);
     exit_section_(b, m, null, r);
     return r;
@@ -537,27 +578,27 @@ public class HtlParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // HTML_FRAGMENT+ | ESC_EXPR+
-  public static boolean textFragment(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "textFragment")) return false;
-    if (!nextTokenIs(b, "<text fragment>", ESC_EXPR, HTML_FRAGMENT)) return false;
+  static boolean text_fragment(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "text_fragment")) return false;
+    if (!nextTokenIs(b, "", ESC_EXPR, HTML_FRAGMENT)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TEXT_FRAGMENT, "<text fragment>");
-    r = textFragment_0(b, l + 1);
-    if (!r) r = textFragment_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = text_fragment_0(b, l + 1);
+    if (!r) r = text_fragment_1(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
   // HTML_FRAGMENT+
-  private static boolean textFragment_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "textFragment_0")) return false;
+  private static boolean text_fragment_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "text_fragment_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, HTML_FRAGMENT);
     int c = current_position_(b);
     while (r) {
       if (!consumeToken(b, HTML_FRAGMENT)) break;
-      if (!empty_element_parsed_guard_(b, "textFragment_0", c)) break;
+      if (!empty_element_parsed_guard_(b, "text_fragment_0", c)) break;
       c = current_position_(b);
     }
     exit_section_(b, m, null, r);
@@ -565,15 +606,15 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   // ESC_EXPR+
-  private static boolean textFragment_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "textFragment_1")) return false;
+  private static boolean text_fragment_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "text_fragment_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, ESC_EXPR);
     int c = current_position_(b);
     while (r) {
       if (!consumeToken(b, ESC_EXPR)) break;
-      if (!empty_element_parsed_guard_(b, "textFragment_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "text_fragment_1", c)) break;
       c = current_position_(b);
     }
     exit_section_(b, m, null, r);
@@ -581,36 +622,36 @@ public class HtlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // exprNode (',' exprNode)*
-  public static boolean valueList(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "valueList")) return false;
+  // expr_node (',' expr_node)*
+  public static boolean value_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "value_list")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VALUE_LIST, "<value list>");
-    r = exprNode(b, l + 1);
-    r = r && valueList_1(b, l + 1);
+    r = expr_node(b, l + 1);
+    r = r && value_list_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (',' exprNode)*
-  private static boolean valueList_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "valueList_1")) return false;
+  // (',' expr_node)*
+  private static boolean value_list_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "value_list_1")) return false;
     int c = current_position_(b);
     while (true) {
-      if (!valueList_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "valueList_1", c)) break;
+      if (!value_list_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "value_list_1", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
-  // ',' exprNode
-  private static boolean valueList_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "valueList_1_0")) return false;
+  // ',' expr_node
+  private static boolean value_list_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "value_list_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && exprNode(b, l + 1);
+    r = r && expr_node(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

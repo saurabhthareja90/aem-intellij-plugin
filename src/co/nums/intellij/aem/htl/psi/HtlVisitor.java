@@ -63,10 +63,6 @@ public class HtlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitTextFragment(@NotNull HtlTextFragment o) {
-    visitPsiElement(o);
-  }
-
   public void visitValueList(@NotNull HtlValueList o) {
     visitPsiElement(o);
   }

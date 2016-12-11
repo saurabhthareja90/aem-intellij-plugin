@@ -22,7 +22,6 @@ public interface HtlTokenTypes {
   IElementType SIMPLE = new HtlElementType("SIMPLE");
   IElementType STRING_LITERAL = new HtlElementType("STRING_LITERAL");
   IElementType TERM = new HtlElementType("TERM");
-  IElementType TEXT_FRAGMENT = new HtlElementType("TEXT_FRAGMENT");
   IElementType VALUE_LIST = new HtlElementType("VALUE_LIST");
 
   IElementType AND = new HtlTokenType("&&");
@@ -101,9 +100,6 @@ public interface HtlTokenTypes {
       }
       else if (type == TERM) {
         return new HtlTermImpl(node);
-      }
-      else if (type == TEXT_FRAGMENT) {
-        return new HtlTextFragmentImpl(node);
       }
       else if (type == VALUE_LIST) {
         return new HtlValueListImpl(node);

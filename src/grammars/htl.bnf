@@ -56,26 +56,26 @@
   ]
 }
 
-interpolation ::= (expression | textFragment)*
+interpolation ::= (expression | text_fragment)*
 
-textFragment ::= HTML_FRAGMENT+ | ESC_EXPR+
+private text_fragment ::= HTML_FRAGMENT+ | ESC_EXPR+
 
-expression ::= '${' exprNode? ['@' optionList] '}'
+expression ::= '${' expr_node? ['@' option_list] '}'
 
-optionList ::= option (',' option)*
+option_list ::= option (',' option)*
 
-option ::= IDENTIFIER ['=' exprNode]
+option ::= IDENTIFIER ['=' expr_node]
 
-exprNode ::= binaryOp [TERNARY_QUESTION_OP binaryOp TERNARY_BRANCHES_OP binaryOp]
+expr_node ::= binary_op [TERNARY_QUESTION_OP binary_op TERNARY_BRANCHES_OP binary_op]
 
-binaryOp ::= comparisonTerm (operator comparisonTerm)*
+binary_op ::= comparison_term (operator comparison_term)*
 
-comparisonTerm ::= factor [comparisonOp factor]
+comparison_term ::= factor [comparison_op factor]
 
 operator ::= '&&'
            | '||'
 
-comparisonOp ::= '>'
+comparison_op ::= '>'
                | '<'
                | '>='
                | '<='
@@ -85,24 +85,23 @@ comparisonOp ::= '>'
 factor ::= term
          | '!' term
 
-term ::= simple ('[' exprNode ']' | '.' field)*
+term ::= simple ('[' expr_node ']' | '.' field)*
 
 field ::= IDENTIFIER
 
 simple ::= atom
-         | '(' exprNode ')'
-         | '[' valueList ']'
+         | '(' expr_node ')'
+         | '[' value_list ']'
          | '[' ']'
 
-valueList ::= exprNode (',' exprNode)*
+value_list ::= expr_node (',' expr_node)*
 
 atom ::= IDENTIFIER
-     | string_literal
      | INTEGER_NUMBER
      | FLOAT_NUMBER
+     | string_literal
      | boolean_constant
 
 string_literal ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
 
 private boolean_constant ::= BOOLEAN_TRUE | BOOLEAN_FALSE
-
