@@ -1,7 +1,7 @@
 package co.nums.intellij.aem.htl.psi.impl;
 
 import co.nums.intellij.aem.htl.psi.HtlExpression;
-import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.lang.StdLanguages;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -41,7 +41,7 @@ public final class HtlPsiUtil {
 		int offset = element.getTextOffset();
 		if (offset > 0) {
 			FileViewProvider viewProvider = element.getContainingFile().getViewProvider();
-			PsiElement previousElement = viewProvider.getPsi(HTMLLanguage.INSTANCE).findElementAt(offset - 1);
+			PsiElement previousElement = viewProvider.findElementAt(offset - 1, StdLanguages.HTML);
 			if (previousElement != null) {
 				return PsiTreeUtil.getParentOfType(previousElement, XmlAttributeValue.class);
 			}

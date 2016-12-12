@@ -15,8 +15,6 @@ import com.intellij.psi.TokenType;
 %unicode
 
 
-ESC_EXPR = "\\${" ~"}"
-
 WHITE_SPACE_CHAR = [\ \n\r\t\f]
 
 SINGLE_QUOTED_STRING = '([^\\'\r\n]|\\([\\'/bfnrt]|u[a-fA-F0-9]{4}))*'?
@@ -33,13 +31,18 @@ IDENTIFIER = [\p{Alpha}_][\p{Alnum}_:]*
 
 <YYINITIAL> {
   ~"${"                       {
-                                yypushback(2); // get back before ${
-                                yybegin(EXPRESSION);
-                                if (yylength() > 0) {
+                                if (yylength() >= 3 && yytext().toString().substring(yylength() - 3, yylength()).equals("\\${")) {
+                                  // escaped expression
                                   return HtlTokenTypes.HTML_FRAGMENT;
+                                } else {
+                                  // matched expression
+                                  yypushback(2); // get back before ${
+                                  yybegin(EXPRESSION);
+                                  if (yylength() > 0) {
+                                    return HtlTokenTypes.HTML_FRAGMENT;
+                                  }
                                 }
                               }
-  ~{ESC_EXPR}                 { return HtlTokenTypes.HTML_FRAGMENT; }
   !([^]*"${"[^]*)             { return HtlTokenTypes.HTML_FRAGMENT; }
 }
 
