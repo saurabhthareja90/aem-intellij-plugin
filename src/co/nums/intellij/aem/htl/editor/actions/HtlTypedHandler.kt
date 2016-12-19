@@ -13,7 +13,7 @@ class HtlTypedHandler : TypedHandlerDelegate() {
     override fun beforeCharTyped(charTyped: Char, project: Project?, editor: Editor, file: PsiFile, fileType: FileType?): TypedHandlerDelegate.Result {
         if (charTyped == '}' && file.isHtl()) {
             val offset = editor.caretModel.offset
-            if (offset < 3 || offset >= editor.document.textLength) {
+            if (offset < 2 || offset >= editor.document.textLength) {
                 return TypedHandlerDelegate.Result.CONTINUE
             }
             val nextChar = editor.document.charsSequence[offset]
