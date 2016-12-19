@@ -10,6 +10,6 @@ class HtlFileViewProviderFactory : FileViewProviderFactory {
 
     override fun createFileViewProvider(file: VirtualFile, language: Language, manager: PsiManager, eventSystemEnabled: Boolean) =
             if (language.isKindOf(HtlLanguage)) HtlFileViewProvider(manager, file, eventSystemEnabled, language)
-            else throw AssertionError()
+            else throw AssertionError("HTL language expected")
 
 }

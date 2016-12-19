@@ -12,22 +12,21 @@ object HtlExprOptionBracketsInsertHandler : InsertHandler<LookupElement> {
     private const val INTO_BRACKETS_OFFSET = 2
 
     override fun handleInsert(context: InsertionContext, item: LookupElement) {
-        val editor = context.editor
-        val document = editor.document
-        val offset = editor.caretModel.offset
-        if (!hasBrackets(document, offset)) {
-            insertBrackets(context, document, offset)
-            editor.moveCaret(INTO_BRACKETS_OFFSET)
+        val document = context.editor.document
+        val offset = context.editor.caretModel.offset
+        if (!document.hasBracketsAt(offset)) {
+            document.insertBrackets(offset, context)
         }
     }
 
-    private fun hasBrackets(document: Document, offset: Int) = document.hasText(offset, "=[")
+    private fun Document.hasBracketsAt(offset: Int) = this.hasText(offset, "=[")
 
-    private fun insertBrackets(context: InsertionContext, document: Document, offset: Int) {
-        document.insertString(offset, "=[]")
+    private fun Document.insertBrackets(offset: Int, context: InsertionContext) {
+        this.insertString(offset, "=[]")
         if (context.completionChar == '=') {
             context.setAddCompletionChar(false) // IDEA-19449
         }
+        context.editor.moveCaret(INTO_BRACKETS_OFFSET)
     }
 
 }

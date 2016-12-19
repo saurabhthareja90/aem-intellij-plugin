@@ -11,7 +11,7 @@ import com.intellij.psi.PsiFile
 class HtlTypedHandler : TypedHandlerDelegate() {
 
     override fun beforeCharTyped(charTyped: Char, project: Project?, editor: Editor, file: PsiFile, fileType: FileType?): TypedHandlerDelegate.Result {
-        if (charTyped == '}' && isHtl(file)) {
+        if (charTyped == '}' && file.isHtl()) {
             val offset = editor.caretModel.offset
             if (offset < 3 || offset >= editor.document.textLength) {
                 return TypedHandlerDelegate.Result.CONTINUE
@@ -26,7 +26,7 @@ class HtlTypedHandler : TypedHandlerDelegate() {
     }
 
     override fun charTyped(charTyped: Char, project: Project?, editor: Editor, file: PsiFile): TypedHandlerDelegate.Result {
-        if (charTyped == '{' && isHtl(file)) {
+        if (charTyped == '{' && file.isHtl()) {
             val offset = editor.caretModel.offset
             if (offset < 2 || offset > editor.document.textLength) {
                 return TypedHandlerDelegate.Result.CONTINUE
@@ -39,6 +39,6 @@ class HtlTypedHandler : TypedHandlerDelegate() {
         return TypedHandlerDelegate.Result.CONTINUE
     }
 
-    private fun isHtl(file: PsiFile) = file.viewProvider.baseLanguage.isKindOf(HtlLanguage)
+    private fun PsiFile.isHtl() = this.viewProvider.baseLanguage.isKindOf(HtlLanguage)
 
 }

@@ -10,13 +10,13 @@ import com.intellij.psi.LanguageSubstitutor
 class HtlLanguageSubstitutor : LanguageSubstitutor() {
 
     override fun getLanguage(file: VirtualFile, project: Project) =
-            if (isHtml(file) && isInJcrRootDirectory(file)) HtlLanguage
+            if (file.isHtml() && file.isInJcrRootDirectory()) HtlLanguage
             else null
 
-    private fun isHtml(file: VirtualFile) = file.fileType === HtmlFileType.INSTANCE
+    private fun VirtualFile.isHtml() = this.fileType === HtmlFileType.INSTANCE
 
-    private fun isInJcrRootDirectory(file: VirtualFile): Boolean {
-        var parent: VirtualFile? = file.parent
+    private fun VirtualFile.isInJcrRootDirectory(): Boolean {
+        var parent: VirtualFile? = this.parent
         while (parent != null) {
             if (parent.name == JcrConstants.JCR_ROOT_DIRECTORY_NAME) {
                 return true

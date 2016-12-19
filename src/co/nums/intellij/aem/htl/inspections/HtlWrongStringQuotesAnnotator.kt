@@ -14,19 +14,16 @@ class HtlWrongStringQuotesAnnotator : Annotator {
     private val MESSAGE = "Quotes must differ from outer attribute's quotes"
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if (element is HtlStringLiteral && quotesClashDetected(element)) {
+        if (element is HtlStringLiteral && element.hasWrongQuotes()) {
             holder.createErrorAnnotation(element.getTextRange(), MESSAGE)
                     .registerFix(stringQuotesFixFor(element))
         }
     }
 
-    private fun quotesClashDetected(element: PsiElement): Boolean {
-        val outerHtmlAttributeQuote = HtlPsiUtil.getOuterHtmlAttributeQuote(element)
-        if (outerHtmlAttributeQuote != null) {
-            val htlStringQuote = element.text[0]
-            return outerHtmlAttributeQuote == htlStringQuote
-        }
-        return false
+    private fun PsiElement.hasWrongQuotes(): Boolean {
+        val htlStringQuote = this.text[0]
+        val outerHtmlAttributeQuote = HtlPsiUtil.getOuterHtmlAttributeQuote(this)
+        return htlStringQuote == outerHtmlAttributeQuote
     }
 
     private fun stringQuotesFixFor(htlStringLiteral: HtlStringLiteral): HtlStringQuotesFix {

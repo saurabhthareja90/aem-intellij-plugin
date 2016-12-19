@@ -18,24 +18,22 @@ abstract class HtlValueBlockInsertHandler
 internal constructor(private val insertionString: String, private val insertionOffset: Int) : InsertHandler<LookupElement> {
 
     override fun handleInsert(context: InsertionContext, item: LookupElement) {
-        val editor = context.editor
-        val document = editor.document
-        val offset = editor.caretModel.offset
-        if (!hasBlockValue(document, offset)) {
-            insertBlockValue(context, document, offset)
-            editor.moveCaret(insertionOffset)
+        val document = context.editor.document
+        val offset = context.editor.caretModel.offset
+        if (!document.hasBlockValue(offset)) {
+            document.insertBlockValue(offset, context)
         }
     }
 
-    private fun hasBlockValue(document: Document, offset: Int) =
-            document.hasText(offset, "=\"") || document.hasText(offset, "='")
+    private fun Document.hasBlockValue(offset: Int) = this.hasText(offset, "=\"") || this.hasText(offset, "='")
 
-    private fun insertBlockValue(context: InsertionContext, document: Document, offset: Int) {
-        val toInsert = if (glitchDetected(document, offset)) (insertionString + " ") else insertionString
-        document.insertString(offset, toInsert)
+    private fun Document.insertBlockValue(offset: Int, context: InsertionContext) {
+        val toInsert = if (glitchDetected(this, offset)) (insertionString + " ") else insertionString
+        this.insertString(offset, toInsert)
         if (context.completionChar == '=') {
             context.setAddCompletionChar(false) // IDEA-19449
         }
+        context.editor.moveCaret(insertionOffset)
     }
 
     private fun glitchDetected(document: Document, offset: Int) =

@@ -8,33 +8,31 @@ import com.intellij.codeInsight.completion.InsertHandler
 import com.intellij.codeInsight.completion.InsertionContext
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.openapi.editor.Document
-import com.intellij.openapi.editor.Editor
 
 object HtlExprOptionQuotesInsertHandler : InsertHandler<LookupElement> {
 
     private const val INTO_QUOTES_OFFSET = 2
 
     override fun handleInsert(context: InsertionContext, item: LookupElement) {
-        val editor = context.editor
-        val document = editor.document
-        val offset = editor.caretModel.offset
-        if (!hasQuotes(document, offset)) {
-            handleQuotes(context, editor, document, offset)
+        val document = context.editor.document
+        val offset = context.editor.caretModel.offset
+        if (!document.hasQuotesAt(offset)) {
+            handleQuotes(document, offset, context)
         }
     }
 
-    private fun hasQuotes(document: Document, offset: Int) =
-            document.hasText(offset, "=\"") || document.hasText(offset, "='")
+    private fun Document.hasQuotesAt(offset: Int) = this.hasText(offset, "=\"") || this.hasText(offset, "='")
 
-    private fun handleQuotes(context: InsertionContext, editor: Editor, document: Document, offset: Int) {
-        insertQuotes(context, document, offset)
+    private fun handleQuotes(document: Document, offset: Int, context: InsertionContext) {
+        document.insertQuotes(offset, context)
+        val editor = context.editor
         editor.moveCaret(INTO_QUOTES_OFFSET)
         AutoPopupController.getInstance(context.project).scheduleAutoPopup(editor)
     }
 
-    private fun insertQuotes(context: InsertionContext, document: Document, offset: Int) {
+    private fun Document.insertQuotes(offset: Int, context: InsertionContext) {
         val quote = getQuoteToInsert(context, offset)
-        document.insertString(offset, "=$quote$quote")
+        this.insertString(offset, "=$quote$quote")
     }
 
     private fun getQuoteToInsert(context: InsertionContext, offset: Int): Char {

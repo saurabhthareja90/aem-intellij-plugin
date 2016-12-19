@@ -19,14 +19,14 @@ object HtlPsiUtil {
      */
     fun getOuterHtmlAttributeQuote(element: PsiElement): Char? {
         val htlExpression = PsiTreeUtil.getParentOfType(element, HtlExpression::class.java) ?: return null
-        val xmlAttributeValue = getOuterXmlAttributeValue(htlExpression) ?: return null
-        return xmlAttributeValue.text.getOrNull(0)
+        val outerAttrValue = htlExpression.getOuterXmlAttributeValue() ?: return null
+        return outerAttrValue.text.getOrNull(0)
     }
 
-    private fun getOuterXmlAttributeValue(htlExpression: HtlExpression): XmlAttributeValue? {
-        val offset = htlExpression.textOffset
+    private fun HtlExpression.getOuterXmlAttributeValue(): XmlAttributeValue? {
+        val offset = this.textOffset
         if (offset > 0) {
-            val viewProvider = htlExpression.containingFile.viewProvider
+            val viewProvider = this.containingFile.viewProvider
             val previousElement = viewProvider.findElementAt(offset - 1, StdLanguages.HTML) ?: return null
             return PsiTreeUtil.getParentOfType(previousElement, XmlAttributeValue::class.java)
         }

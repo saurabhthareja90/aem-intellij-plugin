@@ -6,11 +6,13 @@ import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IElementType
 
+private const val STRUCTURAL = true
+
 class HtlBraceMatcher : PairedBraceMatcher {
 
     private val PAIRS = arrayOf(
-            BracePair(HtlTokenTypes.LEFT_BRACKET, HtlTokenTypes.RIGHT_BRACKET, false),
-            BracePair(HtlTokenTypes.LEFT_PARENTH, HtlTokenTypes.RIGHT_PARENTH, false)
+            BracePair(HtlTokenTypes.LEFT_BRACKET, HtlTokenTypes.RIGHT_BRACKET, !STRUCTURAL),
+            BracePair(HtlTokenTypes.LEFT_PARENTH, HtlTokenTypes.RIGHT_PARENTH, !STRUCTURAL)
     )
 
     override fun getPairs() = PAIRS

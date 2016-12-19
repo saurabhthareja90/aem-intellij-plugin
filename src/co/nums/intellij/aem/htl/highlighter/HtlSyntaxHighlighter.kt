@@ -2,7 +2,9 @@ package co.nums.intellij.aem.htl.highlighter
 
 import co.nums.intellij.aem.htl.parsing.HtlLexerAdapter
 import co.nums.intellij.aem.htl.psi.HtlTokenTypes
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors.*
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors.KEYWORD
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors.NUMBER
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors.STRING
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType

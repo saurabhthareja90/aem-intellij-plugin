@@ -33,8 +33,7 @@ object HtlDisplayContextsProvider : CompletionProvider<CompletionParameters>() {
                     .withIcon(HtlIcons.HTL_DISPLAY_CONTEXT)
                     .withTypeText("HTL display context", true)
 
-    override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext, resultSet: CompletionResultSet) {
-        resultSet.addAllElements(displayContextElements)
-    }
+    override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext, resultSet: CompletionResultSet) =
+            resultSet.addAllElements(displayContextElements)
 
 }

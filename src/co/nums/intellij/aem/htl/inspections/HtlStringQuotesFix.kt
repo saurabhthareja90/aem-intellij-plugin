@@ -14,8 +14,8 @@ private const val NAME = "Fix quotes"
 private const val SINGLE_QUOTE = '\''
 private const val DOUBLE_QUOTE = '"'
 
-object HtlStringSingleQuotesFix : HtlStringQuotesFix('\'')
-object HtlStringDoubleQuotesFix : HtlStringQuotesFix('"')
+object HtlStringSingleQuotesFix : HtlStringQuotesFix(SINGLE_QUOTE)
+object HtlStringDoubleQuotesFix : HtlStringQuotesFix(DOUBLE_QUOTE)
 
 open class HtlStringQuotesFix(private val quoteToFix: Char) : IntentionAction {
 
@@ -24,18 +24,18 @@ open class HtlStringQuotesFix(private val quoteToFix: Char) : IntentionAction {
 
     override fun invoke(project: Project, editor: Editor, file: PsiFile) {
         val currentElement = file.findElementAt(editor.caretModel.offset) ?: return
-        if (isHtlString(currentElement) && editionAllowed(currentElement)) {
+        if (currentElement.isHtlString() && currentElement.canBeEdited()) {
             fixQuotes(project, file, currentElement)
         }
     }
 
-    private fun isHtlString(element: PsiElement) =
-            element is LeafPsiElement
-                    && (element.elementType === HtlTokenTypes.SINGLE_QUOTED_STRING
-                    || element.elementType === HtlTokenTypes.DOUBLE_QUOTED_STRING)
+    private fun PsiElement.isHtlString() =
+            this is LeafPsiElement
+                    && (this.elementType === HtlTokenTypes.SINGLE_QUOTED_STRING
+                    || this.elementType === HtlTokenTypes.DOUBLE_QUOTED_STRING)
 
-    private fun editionAllowed(element: PsiElement) =
-            element.isValid && FileModificationService.getInstance().prepareFileForWrite(element.containingFile)
+    private fun PsiElement.canBeEdited() =
+            this.isValid && FileModificationService.getInstance().prepareFileForWrite(this.containingFile)
 
     private fun fixQuotes(project: Project, file: PsiFile, htlStringLiteral: PsiElement) {
         val document = PsiDocumentManager.getInstance(project).getDocument(file)
@@ -55,8 +55,11 @@ open class HtlStringQuotesFix(private val quoteToFix: Char) : IntentionAction {
                     && currentText.endsWith(Character.toString(quoteToFix)) && !replacement.endsWith("\\" + quoteToFix)
 
     override fun getText() = NAME
+
     override fun getFamilyName() = NAME
+
     override fun startInWriteAction() = true
+
     override fun isAvailable(project: Project, editor: Editor, file: PsiFile) = true
 
 }
