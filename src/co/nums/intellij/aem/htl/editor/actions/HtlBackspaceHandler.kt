@@ -18,8 +18,11 @@ class HtlBackspaceHandler : BackspaceHandlerDelegate() {
 
     override fun charDeleted(deletedChar: Char, file: PsiFile, editor: Editor): Boolean {
         if (deletedChar == '{' && file.isHtl()) {
-            val document = editor.document
             val offset = editor.caretModel.offset
+            if (offset < 1 || offset >= editor.document.textLength) {
+                return false
+            }
+            val document = editor.document
             val nextChar = document.charsSequence[offset]
             if (nextChar == '}' && file.isAtHtlExpressionToken(offset)) {
                 document.removeText(offset, offset + 1)
