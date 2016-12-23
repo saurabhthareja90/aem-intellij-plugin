@@ -46,6 +46,12 @@ test {
   }
 }
 
+jacocoTestReport {
+  reports {
+    xml.enabled true
+  }
+}
+
 idea {
   module {
     generatedSourceDirs += file('gen')
