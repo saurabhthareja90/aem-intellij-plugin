@@ -12,7 +12,7 @@
           <li>HTL/Sightly support (only for HTML files under 'jcr_root' directory)
               <ul>
               <li>syntax validation and highlighting</li>
-              <li>autocompletion for block attributes (data-sly-*), expression options and display contexts</li>
+              <li>autocompletion for block attributes (data-sly-*), global objects, properties, expression options and display contexts</li>
               </ul>
           </li>
       </ul>
@@ -20,7 +20,8 @@
 
 	<change-notes><![CDATA[
 		<ul>
-            <li>autocompletion for block attributes (data-sly-*), expression options and display contexts</li>
+            <li>autocompletion for global objects (properties, pageProperties, currentPage, etc.) and predefined AEM properties (jcr:title, sling:resourceType, etc.)</li>
+            <li>improved typing experience</li>
 		</ul>
 	]]></change-notes>
 

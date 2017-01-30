@@ -22,4 +22,9 @@ Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM 
 
 * HTL/Sightly support (only for HTML files under `jcr_root` directory)
   * syntax validation and highlighting
-  * autocompletion for block attributes (`data-sly-*`), built-in expression options and display contexts
+  * autocompletion for:
+    * block attributes (`data-sly-*`)
+    * global objects (`properties`, `currentPage`, `wcmmode`, etc.)
+    * properties (`jcr:title`, `cq:lastModified`, `sling:resourceType`, etc.)
+    * built-in expression options (`context`, `path`, `addSelector`, `i18n`, etc.)
+    * display contexts (`html`, `scriptToken`, `styleToken`, `unsafe`, etc.)
