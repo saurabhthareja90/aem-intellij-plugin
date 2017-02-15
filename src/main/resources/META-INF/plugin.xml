@@ -20,6 +20,7 @@
                           <li>built-in expression options (<code>context</code>, <code>addSelector</code>, <code>i18n</code>, etc.)</li>
                           <li>display contexts (<code>html</code>, <code>scriptToken</code>, <code>unsafe</code>, etc.)</li>
                           <li>use objects (Use API objects and Sling Models)</li>
+                          <li>block variables (eg. <code>data-sly-use.variable</code>)</li>
                       </ul>
                   </li>
               </ul>
@@ -30,6 +31,7 @@
 	<change-notes><![CDATA[
         <ul>
             <li>autocompletion for use objects (<code>data-sly-use</code>)</li>
+            <li>autocompletion for block variables (eg. <code>data-sly-use.variable</code>)</li>
         </ul>
 	]]></change-notes>
 
