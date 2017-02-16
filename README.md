@@ -28,4 +28,5 @@ Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM 
     * properties (`jcr:title`, `cq:lastModified`, `sling:resourceType`, etc.)
     * built-in expression options (`context`, `addSelector`, `i18n`, etc.)
     * display contexts (`html`, `scriptToken`, `unsafe`, etc.)
+    * use objects (Use API objects and Sling Models)
     * block variables (eg. `data-sly-use.variable`)
