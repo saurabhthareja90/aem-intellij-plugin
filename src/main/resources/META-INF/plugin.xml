@@ -2,14 +2,14 @@
 <idea-plugin version="2" url="https://github.com/karollewandowski/aem-intellij-plugin">
 	<id>co.nums.intellij.aem</id>
 	<name>AEM IntelliJ Plugin</name>
-	<version>0.5</version>
+	<version>0.6</version>
 	<vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
 	<description><![CDATA[
       Intellij Platform plugin for Adobe Experience Manager.<br>
       Features:<br>
       <ul>
-          <li>HTL/Sightly support (only for HTML files under <code>jcr_root</code> directory)
+          <li>HTL/Sightly support (HTML files under <code>jcr_root</code> directory)
               <ul>
                   <li>syntax validation and highlighting</li>
                   <li>autocompletion and documentation for:
