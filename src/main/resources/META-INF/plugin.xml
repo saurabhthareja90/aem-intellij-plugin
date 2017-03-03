@@ -32,6 +32,7 @@
         <ul>
             <li>HTL comments support</li>
             <li>iterable objects properties (<code>itemList.even</code>, <code>itemList.first</code>, <code>itemList.odd</code>, etc.)</li>
+            <li>parsing optimizations and improvements</li>
         </ul>
 	]]></change-notes>
 
