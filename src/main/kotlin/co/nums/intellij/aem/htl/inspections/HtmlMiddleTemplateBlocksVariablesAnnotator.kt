@@ -1,7 +1,7 @@
 package co.nums.intellij.aem.htl.inspections
 
 import co.nums.intellij.aem.htl.psi.extensions.XmlElementVisitorImpl
-import co.nums.intellij.aem.htl.psi.extensions.isHtlUseBlock
+import co.nums.intellij.aem.htl.psi.extensions.isHtlUseIdentifierBlock
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.codeInspection.XmlSuppressableInspectionTool
 import com.intellij.psi.PsiElementVisitor
@@ -26,7 +26,7 @@ class HtmlMiddleTemplateBlocksVariablesAnnotator : XmlSuppressableInspectionTool
     override fun isEnabledByDefault() = true
 
     fun checkAttribute(attribute: XmlAttribute, holder: ProblemsHolder, firstElement: XmlTag?) {
-        if (attribute.isHtlUseBlock() && (firstElement != null && firstElement != attribute.parent)) {
+        if (attribute.isHtlUseIdentifierBlock() && (firstElement != null && firstElement != attribute.parent)) {
             holder.registerProblem(attribute, MESSAGE, HtmlMiddleTemplateBlocksVariablesFix(attribute, firstElement))
         }
     }
