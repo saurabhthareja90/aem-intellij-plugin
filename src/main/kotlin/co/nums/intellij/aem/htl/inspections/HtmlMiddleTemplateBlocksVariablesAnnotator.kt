@@ -1,7 +1,7 @@
 package co.nums.intellij.aem.htl.inspections
 
-import co.nums.intellij.aem.htl.psi.extensions.XmlElementVisitorExtension
-import co.nums.intellij.aem.htl.psi.extensions.isHtlVariableBlock
+import co.nums.intellij.aem.htl.psi.extensions.XmlElementVisitorImpl
+import co.nums.intellij.aem.htl.psi.extensions.isHtlUseBlock
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.codeInspection.XmlSuppressableInspectionTool
 import com.intellij.psi.PsiElementVisitor
@@ -26,13 +26,13 @@ class HtmlMiddleTemplateBlocksVariablesAnnotator : XmlSuppressableInspectionTool
     override fun isEnabledByDefault() = true
 
     fun checkAttribute(attribute: XmlAttribute, holder: ProblemsHolder, firstElement: XmlTag?) {
-        if (attribute.isHtlVariableBlock() && attribute.name.startsWith("data-sly-use") && (firstElement != null && firstElement != attribute.parent)) {
+        if (attribute.isHtlUseBlock() && (firstElement != null && firstElement != attribute.parent)) {
             holder.registerProblem(attribute, MESSAGE, HtmlMiddleTemplateBlocksVariablesFix(attribute, firstElement))
         }
     }
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
-        return object : XmlElementVisitorExtension() {
+        return object : XmlElementVisitorImpl() {
             override fun visitXmlFile(file: XmlFile?) {
                 super.visitXmlFile(file)
             }

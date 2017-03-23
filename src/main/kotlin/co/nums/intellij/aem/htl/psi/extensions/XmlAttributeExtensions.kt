@@ -11,8 +11,12 @@ private val htlVariableBlocksNames = HtlDefinitions.blocks.filter { HtlBlocks.VA
 fun XmlAttribute.isHtlBlock() = (this.firstChild as? XmlToken)?.isHtlBlock() ?: false
 
 fun XmlAttribute.isHtlVariableBlock(): Boolean {
-    val blockType = (this.firstChild as? XmlToken)?.text?.substringBefore(".")?.toLowerCase()
-    return htlVariableBlocksNames.contains(blockType)
+    return htlVariableBlocksNames.contains(getBlockType())
 }
 
+private fun XmlAttribute.getBlockType() = (this.firstChild as? XmlToken)?.text?.substringBefore(".")?.toLowerCase()
+
+
 fun XmlToken.isHtlBlock() = htlBlocksNames.contains(this.text.substringBefore(".").toLowerCase())
+
+fun XmlAttribute.isHtlUseBlock() = HtlBlocks.USE.equals(getBlockType())

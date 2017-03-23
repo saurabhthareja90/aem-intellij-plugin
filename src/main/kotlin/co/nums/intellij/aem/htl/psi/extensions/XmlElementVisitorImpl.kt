@@ -3,7 +3,7 @@ package co.nums.intellij.aem.htl.psi.extensions
 import com.intellij.psi.XmlElementVisitor
 import com.intellij.psi.xml.XmlTag
 
-open class XmlElementVisitorExtension : XmlElementVisitor() {
+open class XmlElementVisitorImpl : XmlElementVisitor() {
 
     private var firstElement: XmlTag? = null
 
