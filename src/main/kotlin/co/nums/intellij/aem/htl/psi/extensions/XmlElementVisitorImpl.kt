@@ -23,9 +23,8 @@ open class XmlElementVisitorImpl : XmlElementVisitor() {
                     firstElement = parent
                 }
             }
-
-            super.visitXmlToken(token)
         }
+        super.visitXmlToken(token)
     }
 
     fun getFirstElement(): XmlTag? {
