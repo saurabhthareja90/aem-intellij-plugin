@@ -6,7 +6,6 @@ import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.codeInspection.XmlSuppressableInspectionTool
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.xml.XmlAttribute
-import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
 
 class HtmlMiddleTemplateBlocksVariablesAnnotator : XmlSuppressableInspectionTool() {
@@ -33,9 +32,6 @@ class HtmlMiddleTemplateBlocksVariablesAnnotator : XmlSuppressableInspectionTool
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return object : XmlElementVisitorImpl() {
-            override fun visitXmlFile(file: XmlFile?) {
-                super.visitXmlFile(file)
-            }
 
             override fun visitXmlAttribute(attribute: XmlAttribute) {
                 checkAttribute(attribute, holder, getFirstElement())
