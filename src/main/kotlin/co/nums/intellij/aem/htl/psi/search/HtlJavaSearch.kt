@@ -1,25 +1,26 @@
 package co.nums.intellij.aem.htl.psi.search
 
+import co.nums.intellij.aem.htl.definitions.HtlGlobalObject
 import com.intellij.openapi.project.Project
 import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.searches.*
 
-object HtlJavaSearch {
+class HtlJavaSearch private constructor() {
 
-    private val USE_INTERFACES = arrayOf("io.sightly.java.api.Use", "org.apache.sling.scripting.sightly.pojo.Use")
-    private val SLING_MODEL_ANNOTATION = "org.apache.sling.models.annotations.Model"
+    private val useInterfaces = arrayOf("io.sightly.java.api.Use", "org.apache.sling.scripting.sightly.pojo.Use")
+    private val slingModelAnnotation = "org.apache.sling.models.annotations.Model"
 
     fun useApiClasses(project: Project) = useApiImplementers(project) + slingModels(project)
 
     private fun useApiImplementers(project: Project): Collection<PsiClass> =
-            USE_INTERFACES
+            useInterfaces
                     .mapNotNull { it.toPsiClass(project) }
                     .flatMap { project.findImplementers(it) }
                     .filterNot { it.hasModifierProperty(PsiModifier.ABSTRACT) }
 
     private fun slingModels(project: Project): Collection<PsiClass> =
-            SLING_MODEL_ANNOTATION
+            slingModelAnnotation
                     .toPsiClass(project)
                     ?.let { project.findAnnotatedClasses(it) }
                     .orEmpty()
@@ -32,5 +33,20 @@ object HtlJavaSearch {
 
     private fun Project.findAnnotatedClasses(annotation: PsiClass) =
             AnnotatedElementsSearch.searchPsiClasses(annotation, GlobalSearchScope.allScope(this)).findAll()
+
+    /**
+     * Returns Java PSI class for HTL global object with given name.
+     *
+     * @param project project to find class in
+     * @param globalObjectName global object name
+     */
+    fun globalObjectJavaClass(project: Project, globalObjectName: String?) =
+            HtlGlobalObject.values()
+                    .filter { it.name == globalObjectName }
+                    .map { it.toPsiClass(project) }
+                    .firstOrNull()
+
+    private fun HtlGlobalObject.toPsiClass(project: Project) =
+            JavaPsiFacade.getInstance(project).findClass(this.type, GlobalSearchScope.allScope(project))
 
 }

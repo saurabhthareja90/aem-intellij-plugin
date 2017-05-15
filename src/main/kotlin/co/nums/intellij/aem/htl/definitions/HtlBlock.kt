@@ -9,6 +9,28 @@ const val HTL_BLOCK_PREFIX = "data-sly"
 private val htlIterableBlocksTypes = HtlBlock.values().filter { it.iterable }.map { it.type }.toSet()
 fun isHtlIterableBlock(blockType: String) = blockType in htlIterableBlocksTypes
 
+private val htlScopedVariableBlocksTypes = HtlBlock.values()
+        .filter {
+            it.identifierType == BlockIdentifierType.ELEMENT_CHILDREN_SCOPE_VARIABLE // FIXME: think about it in usages
+                    || it.identifierType == BlockIdentifierType.ELEMENT_SCOPE_VARIABLE
+        }
+        .map { it.type }
+        .toSet()
+fun isScopedVariableBlock(blockType: String) = blockType in htlScopedVariableBlocksTypes
+
+private val htlGlobalVariablesBlocksTypes = HtlBlock.values()
+        .filter { it.identifierType == BlockIdentifierType.GLOBAL_VARIABLE }
+        .map { it.type }
+        .toSet()
+fun isGlobalVariableBlock(blockType: String) = blockType in htlGlobalVariablesBlocksTypes
+
+private val htlTemplateVariablesBlocksTypes = HtlBlock.values()
+        .filter { it.identifierType == BlockIdentifierType.TEMPLATE_NAME }
+        .map { it.type }
+        .toSet()
+fun isTemplateVariableBlock(blockType: String) = blockType in htlTemplateVariablesBlocksTypes
+
+
 enum class HtlBlock(
         val type: String,
         val identifierType: BlockIdentifierType,

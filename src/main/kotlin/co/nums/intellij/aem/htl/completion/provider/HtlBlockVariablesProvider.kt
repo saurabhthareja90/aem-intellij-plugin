@@ -36,23 +36,23 @@ object HtlBlockVariablesProvider : CompletionProvider<CompletionParameters>() {
             }
 
     private fun HtlBlockVariable.notOutOf(templateRange: TextRange?) =
-            templateRange?.contains(this.definer.textOffset) ?: true
+            templateRange?.contains(this.declaration.textOffset) ?: true
 
     private fun PsiElement.isInsideOrAfterDeclarationBlockElement(variable: HtlBlockVariable): Boolean {
-        val blockRangeStart = (variable.definer.context as? XmlTag)?.textRange?.startOffset ?: return false
+        val blockRangeStart = (variable.declaration.context as? XmlTag)?.textRange?.startOffset ?: return false
         val currentElementStartOffset = this.textRange.startOffset
-        return currentElementStartOffset > blockRangeStart && !variable.definer.textRange.contains(currentElementStartOffset)
+        return currentElementStartOffset > blockRangeStart && !variable.declaration.textRange.contains(currentElementStartOffset)
     }
 
     private fun PsiElement.isInBlockElement(variable: HtlBlockVariable): Boolean {
-        val outerTagRange = (variable.definer.context as? XmlTag)?.textRange ?: return false
+        val outerTagRange = (variable.declaration.context as? XmlTag)?.textRange ?: return false
         val currentElementStartOffset = this.textRange.startOffset
         return outerTagRange.startOffset < currentElementStartOffset && currentElementStartOffset < outerTagRange.endOffset
-                && !variable.definer.textRange.contains(currentElementStartOffset)
+                && !variable.declaration.textRange.contains(currentElementStartOffset)
     }
 
     private fun PsiElement.isInBlockElementChildren(variable: HtlBlockVariable): Boolean {
-        val outerTag = variable.definer.context as? XmlTag ?: return false
+        val outerTag = variable.declaration.context as? XmlTag ?: return false
         if (outerTag.isEmpty) return false
         val childrenScopeStart = outerTag.children
                 .filterIsInstance(XmlToken::class.java)

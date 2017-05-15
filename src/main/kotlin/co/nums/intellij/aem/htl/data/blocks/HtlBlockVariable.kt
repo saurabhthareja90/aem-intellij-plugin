@@ -7,5 +7,5 @@ data class HtlBlockVariable(
         val identifier: String,
         val identifierType: BlockIdentifierType,
         val dataType: String,
-        val definer: XmlAttribute
+        val declaration: XmlAttribute
 )
