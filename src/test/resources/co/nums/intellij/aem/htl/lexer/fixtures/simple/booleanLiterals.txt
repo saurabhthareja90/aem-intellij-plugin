@@ -1,0 +1,7 @@
+${ ('${')
+WHITE_SPACE ('\n')
+BOOLEAN_LITERAL ('true')
+WHITE_SPACE ('\n')
+BOOLEAN_LITERAL ('false')
+WHITE_SPACE ('\n')
+} ('}')

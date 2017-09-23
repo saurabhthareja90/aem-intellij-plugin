@@ -18,9 +18,6 @@
     EXPR_START='${'
     EXPR_END='}'
 
-    BOOLEAN_TRUE='true'
-    BOOLEAN_FALSE='false'
-
     DOT='.';
     COMMA=',';
     OPTIONS_SEPARATOR='@';
@@ -47,13 +44,15 @@
     IDENTIFIER='regexp:[\p{Alpha}_][\p{Alnum}_:]*'
     INTEGER_NUMBER='regexp:0|[1-9]\d*'
     FLOAT_NUMBER='regexp:[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?|[0-9]+[eE][-+]?[0-9]+'
-    DOUBLE_QUOTED_STRING='regexp:"([^\\"\r\n]|\\([\\"/bfnrt]|u[a-fA-F0-9]{4}))*"'
-    SINGLE_QUOTED_STRING="regexp:'([^\\'\r\n]|\\([\\'/bfnrt]|u[a-fA-F0-9]{4}))*'"
+    BOOLEAN_LITERAL='regexp:true|false'
+
+    SINGLE_QUOTE="'"
+    DOUBLE_QUOTE='"'
+    STRING_CONTENT="regexp:([^\\']|\\([\\'\"/bfnrt]|u[a-fA-F0-9]{4}))*"
 
     COMMENT_START='<!--/*'
     COMMENT_END='*/-->'
     COMMENT_CONTENT='regexp:.*'
-    WHITE_SPACE='regexp:\s'
   ]
 
   mixin("template_comment")="co.nums.intellij.aem.htl.psi.mixins.HtlCommentMixin"
@@ -73,13 +72,25 @@ private expression_recover ::= !('${' | outer_text | "<!--/*")
 
 option_list ::= option (',' option)*
 
-option ::= IDENTIFIER ['=' expr_node]
+option ::= option_name ['=' expr_node]
 
-expr_node ::= binary_operation ['?' binary_operation WHITE_SPACE ':' WHITE_SPACE binary_operation]
+option_name ::= IDENTIFIER
 
-binary_operation ::= comparison_term (logical_operator comparison_term)*
+private expr_node ::= ternary_operator | logical_operation
 
-comparison_term ::= factor [comparison_operator factor]
+ternary_operator ::= logical_operation '?' logical_operation ':' logical_operation {
+  pin=2
+}
+
+logical_operation ::= logical_operand (logical_operator logical_operand)*
+
+logical_operand ::= comparison | term
+
+comparison ::= factor comparison_operator factor
+
+factor ::= term
+
+private term ::= '!'? simple property_access*
 
 logical_operator ::= '&&'
                    | '||'
@@ -91,33 +102,33 @@ comparison_operator ::= '>'
                       | '=='
                       | '!='
 
-private factor ::= '!'? term
-
-private term ::= simple property_access*
-
 property_access ::= bracket_property_access | dot_property_access
 
-bracket_property_access ::= '[' expr_node ']'
+bracket_property_access ::= '[' expr_node ']' {
+  pin=1
+}
 
-dot_property_access ::= '.' field
-
-field ::= IDENTIFIER
+dot_property_access ::= '.' IDENTIFIER {
+  pin=1
+}
 
 private simple ::= atom
+                 | array
                  | '(' expr_node ')'
-                 | '[' value_list ']'
-                 | '[' ']'
 
-value_list ::= expr_node (',' expr_node)*
+array ::= '[' value_list? ']' {
+  pin=1
+}
 
-private atom ::= variable
+private value_list ::= expr_node (',' expr_node)*
+
+private atom ::= BOOLEAN_LITERAL
                | INTEGER_NUMBER
                | FLOAT_NUMBER
+               | variable
                | string_literal
-               | boolean_constant
 
 variable ::= IDENTIFIER
 
-string_literal ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
-
-private boolean_constant ::= BOOLEAN_TRUE | BOOLEAN_FALSE
+string_literal ::= "'" STRING_CONTENT? "'"
+                 | '"' STRING_CONTENT? '"'

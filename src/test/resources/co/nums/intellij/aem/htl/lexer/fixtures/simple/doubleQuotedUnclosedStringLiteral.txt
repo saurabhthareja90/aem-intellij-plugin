@@ -1,0 +1,3 @@
+${ ('${')
+" ('"')
+STRING_CONTENT ('unclosed double quoted string}')
