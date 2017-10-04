@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/karollewandowski/aem-intellij-plugin.svg?branch=master)](https://travis-ci.org/karollewandowski/aem-intellij-plugin)
 [![codecov](https://codecov.io/gh/karollewandowski/aem-intellij-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/karollewandowski/aem-intellij-plugin)
-[![codebeat badge](https://codebeat.co/badges/83dbd668-d574-4be5-b7fb-8b5ae6fdaf8b)](https://codebeat.co/projects/github-com-karollewandowski-aem-intellij-plugin)
+[![codebeat](https://codebeat.co/badges/83dbd668-d574-4be5-b7fb-8b5ae6fdaf8b)](https://codebeat.co/projects/github-com-karollewandowski-aem-intellij-plugin)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/9269-aem-intellij-plugin.svg)](https://plugins.jetbrains.com/plugin/9269-aem-intellij-plugin)
+
 
 # AEM IntelliJ Plugin
 
