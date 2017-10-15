@@ -6,7 +6,14 @@
     <vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
     <description><![CDATA[
-        Intellij Platform plugin for Adobe Experience Manager.<br>
+        <strong>Intellij Platform plugin for Adobe Experience Manager</strong>
+        <br/>
+        <br/>
+        <a href="https://github.com/karollewandowski/aem-intellij-plugin">GitHub</a> |
+        <a href="https://github.com/karollewandowski/aem-intellij-plugin/issues">Bug Tracker</a> |
+        <a href="https://www.paypal.me/klewandowski86">Donate with PayPal</a>
+        <br/>
+        <br/>
         Features:<br>
         <ul>
             <li>HTL/Sightly support (HTML files under <code>jcr_root</code> directory)
@@ -26,6 +33,10 @@
                 </ul>
             </li>
         </ul>
+        <p>
+            <i>If you find the plugin helpful and it boosts your productivity, please consider PayPal donation,
+            so I can stay motivated and provide new features faster.</i>
+        </p>
     ]]></description>
 
     <change-notes><![CDATA[
