@@ -8,9 +8,7 @@
 
 IntelliJ platform plugin for Adobe Experience Manager. Plugin is compatible with all IntelliJ Platform products.
 
-Project is in early development stage. **Reporting issues is highly appreciated**.
-
-New features will be added systematically. Work progress and planned features can be found on [projects boards](https://github.com/karollewandowski/aem-intellij-plugin/projects). 
+**Reporting issues and requesting features is highly appreciated**.
 
 
 ## Installation
