@@ -1,14 +1,16 @@
-HTL File: unclosedPropertyAccess.html
+HTL File: incompleteDotPropertyAccess.html
   HtlExpressionImpl(EXPRESSION)
     PsiElement(${)('${')
     HtlLogicalOperationImpl(LOGICAL_OPERATION)
       HtlLogicalOperandImpl(LOGICAL_OPERAND)
         HtlVariableImpl(VARIABLE)
           PsiElement(IDENTIFIER)('object')
-    PsiElement([)('[')
-    PsiElement(')(''')
-    PsiElement(STRING_CONTENT)('property')
-    PsiElement(')(''')
+    PsiElement(.)('.')
     PsiWhiteSpace(' ')
-    PsiErrorElement:<comparison operator>, <logical operator>, <property access>, '?' or ']' expected, got '}'
-      PsiElement(})('}')
+    PsiErrorElement:IDENTIFIER expected, got '||'
+      PsiElement(||)('||')
+    PsiWhiteSpace(' ')
+    PsiElement(')(''')
+    PsiElement(STRING_CONTENT)('default value')
+    PsiElement(')(''')
+    PsiElement(})('}')
