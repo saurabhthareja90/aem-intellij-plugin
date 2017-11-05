@@ -2,15 +2,13 @@ package co.nums.intellij.aem.htl.inspections
 
 import co.nums.intellij.aem.extensions.canBeEdited
 import co.nums.intellij.aem.htl.definitions.*
+import co.nums.intellij.aem.htl.extensions.*
 import co.nums.intellij.aem.htl.highlighter.createReferenceErrorAnnotation
-import co.nums.intellij.aem.htl.psi.extensions.*
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.lang.annotation.*
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiDocumentManager
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
+import com.intellij.psi.*
 import com.intellij.psi.xml.XmlAttribute
 import com.intellij.util.text.EditDistance
 

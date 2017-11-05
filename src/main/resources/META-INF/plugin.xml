@@ -54,11 +54,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity
-                implementation="co.nums.intellij.aem.settings.SetAemVersionNotifier"/>
-
-        <applicationService
-                serviceInterface="co.nums.intellij.aem.service.AemFilesDetector"
-                serviceImplementation="co.nums.intellij.aem.service.AemFilesDetectorImpl"/>
+                implementation="co.nums.intellij.aem.settings.SetAemVersionNotifier"
+                order="last"/>
 
         <applicationService
                 serviceInterface="co.nums.intellij.aem.service.PluginInfoProvider"
@@ -69,12 +66,19 @@
                 serviceImplementation="co.nums.intellij.aem.errorreports.GitHubIssueServiceImpl"/>
 
         <projectService
+                serviceImplementation="co.nums.intellij.aem.service.JcrRoots"/>
+
+        <projectService
                 serviceImplementation="co.nums.intellij.aem.settings.AemSettings"/>
 
         <projectConfigurable
                 instance="co.nums.intellij.aem.settings.AemProjectConfigurable"
                 displayName="AEM IntelliJ Plugin"
                 groupId="other"/>
+
+        <iconProvider
+                implementation="co.nums.intellij.aem.icons.providers.JcrRootIconProvider"
+                order="first"/>
 
         <fileTypeFactory
                 implementation="co.nums.intellij.aem.htl.file.HtlFileTypeFactory"/>
@@ -159,12 +163,21 @@
                 implementationClass="co.nums.intellij.aem.htl.inspections.DisallowedHtlAttributeBlockAnnotator"
                 order="after htlBlocksHighlighter"/>
 
-        <errorHandler implementation="co.nums.intellij.aem.errorreports.GitHubErrorReportSubmitter"/>
+        <errorHandler
+                implementation="co.nums.intellij.aem.errorreports.GitHubErrorReportSubmitter"/>
 
     </extensions>
 
     <actions>
-        <action id="co.nums.intellij.aem.errorreports.TestExceptionAction"
+        <action
+                id="co.nums.intellij.aem.action.MarkAsJcrRootAction"
+                class="co.nums.intellij.aem.action.MarkAsJcrRootAction"
+                text="JCR Root">
+            <add-to-group group-id="MarkRootGroup" anchor="last"/>
+        </action>
+
+        <action
+                id="co.nums.intellij.aem.errorreports.TestExceptionAction"
                 class="co.nums.intellij.aem.errorreports.TestExceptionAction"
                 text="___ThrowTestException___">
         </action>

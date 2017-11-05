@@ -1,17 +1,14 @@
 package co.nums.intellij.aem.htl.inspections
 
 import co.nums.intellij.aem.extensions.canBeEdited
+import co.nums.intellij.aem.htl.extensions.isPartOfHtlString
 import co.nums.intellij.aem.htl.psi.HtlStringLiteral
-import co.nums.intellij.aem.htl.psi.extensions.isPartOfHtlString
 import co.nums.intellij.aem.htl.psi.impl.HtlPsiUtil
 import com.intellij.codeInsight.intention.IntentionAction
-import com.intellij.lang.annotation.AnnotationHolder
-import com.intellij.lang.annotation.Annotator
+import com.intellij.lang.annotation.*
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiDocumentManager
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
+import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 
 /**

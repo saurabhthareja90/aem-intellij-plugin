@@ -2,7 +2,7 @@ package co.nums.intellij.aem.htl.psi.search
 
 import co.nums.intellij.aem.htl.data.blocks.HtlBlockVariable
 import co.nums.intellij.aem.htl.definitions.HtlBlock
-import co.nums.intellij.aem.htl.psi.extensions.*
+import co.nums.intellij.aem.htl.extensions.*
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.*
@@ -20,7 +20,7 @@ object HtlSearch {
     private fun XmlAttribute.toHtlVariables(): List<HtlBlockVariable> {
         if (this.isHtlBlock()) {
             val blockType = this.nameElement.text.substringBefore(".").toLowerCase()
-            if (htlVariableBlockTypes.contains(blockType)) {
+            if (blockType in htlVariableBlockTypes) {
                 val blockDefinition = htlVariableBlocks.find { it.type == blockType } ?: return emptyList()
                 return this.createHtlVariables(blockDefinition)
             }
