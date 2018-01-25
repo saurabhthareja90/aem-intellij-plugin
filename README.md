@@ -22,7 +22,7 @@ Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM 
 
 * HTL/Sightly support (only for HTML files under `jcr_root` directory)
   * syntax validation and highlighting
-  * autocompletion and documentation for:
+  * autocompletion, inspections and documentation for:
     * block attributes (`data-sly-*`)
     * global objects (`properties`, `currentPage`, `wcmmode`, etc.)
     * properties (`jcr:title`, `cq:lastModified`, `sling:resourceType`, etc.)
@@ -30,3 +30,4 @@ Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM 
     * display contexts (`html`, `scriptToken`, `unsafe`, etc.)
     * use objects (Use API objects and Sling Models)
     * block variables (eg. `data-sly-use.variable`)
+    * template parameters (eg. <code>data-sly-template.myTemplate="${ @ param1, param2}"</code>)
