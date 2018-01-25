@@ -2,7 +2,7 @@
 <idea-plugin url="https://github.com/karollewandowski/aem-intellij-plugin">
     <id>co.nums.intellij.aem</id>
     <name>AEM IntelliJ Plugin</name>
-    <version>0.7</version>
+    <version>0.8</version>
     <vendor url="https://github.com/karollewandowski">Karol Lewandowski</vendor>
 
     <description><![CDATA[
@@ -19,7 +19,7 @@
             <li>HTL/Sightly support (HTML files under <code>jcr_root</code> directory)
                 <ul>
                     <li>syntax validation and highlighting</li>
-                    <li>autocompletion and documentation for:
+                    <li>autocompletion, inspections and documentation for:
                         <ul>
                             <li>block attributes (<code>data-sly-*</code>)</li>
                             <li>global objects (<code>properties</code>, <code>currentPage</code>, <code>wcmmode</code>, etc.)</li>
@@ -28,6 +28,7 @@
                             <li>display contexts (<code>html</code>, <code>scriptToken</code>, <code>unsafe</code>, etc.)</li>
                             <li>use objects (Use API objects and Sling Models)</li>
                             <li>block variables (eg. <code>data-sly-use.variable</code>)</li>
+                            <li>template parameters (eg. <code>data-sly-template.myTemplate="${ @ param1, param2}"</code>)</li>
                         </ul>
                     </li>
                 </ul>
@@ -40,11 +41,15 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        Changes:
         <ul>
-            <li>HTL comments support</li>
-            <li>iterable objects properties (<code>itemList.even</code>, <code>itemList.first</code>, <code>itemList.odd</code>, etc.)</li>
+            <li>improved typing experience by providing more completions inspection, quick fixes, etc.</li>
+            <li>improved HTL syntax highlighting</li>
             <li>parsing optimizations and improvements</li>
+            <li>stability improvements (code coverage increased to 76%)</li>
+            <li>bug fixes</li>
         </ul>
+        Full release details can be found on Github: https://github.com/karollewandowski/aem-intellij-plugin/releases/tag/v0.8
     ]]></change-notes>
 
     <idea-version since-build="143"/>
