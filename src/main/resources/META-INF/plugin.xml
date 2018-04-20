@@ -42,16 +42,12 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        Changes:
+        Bug fixes:
         <ul>
-            <li>added JCR roots auto-detection</li>
-            <li>improved typing experience by providing more completions inspection, quick fixes, etc.</li>
-            <li>improved HTL syntax highlighting</li>
-            <li>parsing optimizations and improvements</li>
-            <li>stability improvements (code coverage increased to 76%)</li>
-            <li>bug fixes</li>
+            <li>No such method exception: ReadAction.compute</li>
+            <li>Invalid range specified in use declaration highlighter</li>
         </ul>
-        Full release details can be found on Github: https://github.com/karollewandowski/aem-intellij-plugin/releases/tag/v0.8
+        Full release details can be found on Github: https://github.com/karollewandowski/aem-intellij-plugin/releases/tag/v0.8.1
     ]]></change-notes>
 
     <idea-version since-build="143"/>
