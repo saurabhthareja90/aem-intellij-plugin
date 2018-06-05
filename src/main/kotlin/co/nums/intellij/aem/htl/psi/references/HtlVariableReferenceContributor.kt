@@ -4,6 +4,7 @@ import co.nums.intellij.aem.htl.HtlLanguage
 import co.nums.intellij.aem.htl.definitions.*
 import co.nums.intellij.aem.htl.extensions.getHtlVariableIdentifier
 import co.nums.intellij.aem.htl.psi.HtlVariable
+import co.nums.intellij.aem.htl.psi.patterns.HtlPatterns
 import com.intellij.lang.html.HTMLLanguage
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
@@ -12,16 +13,22 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlAttribute
 import com.intellij.util.ProcessingContext
 
-// FIXME: dry
+class HtlVariableReferenceContributor : PsiReferenceContributor() {
+
+    override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
+        registrar.registerReferenceProvider(HtlPatterns.htlVariableDeclaration, HtlVariablesReferencesProvider())
+    }
+
+}
 
 class HtlVariablesReferencesProvider : PsiReferenceProvider() {
 
     override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
         val attribute = element as? XmlAttribute ?: return emptyArray()
         val variableReferences: MutableList<PsiReference> = attribute.findReferences()
-                .mapNotNull { it.reference }
+                .map { HtlVariableReference(attribute, it) }
                 .toMutableList()
-        variableReferences.add(0, HtlVariableBlockReference(element as XmlAttributeImpl))
+        variableReferences.add(0, HtlVariableDeclarationWrapper(attribute as XmlAttributeImpl))
         return variableReferences.toTypedArray()
     }
 
@@ -80,7 +87,19 @@ class HtlVariablesReferencesProvider : PsiReferenceProvider() {
 
 }
 
-class HtlVariableBlockReference(private val xmlAttribute: XmlAttributeImpl) : XmlAttributeReference(xmlAttribute) {
+class HtlVariableReference(private val declarationAttribute: XmlAttribute, htlVariable: HtlVariable) : PsiReferenceBase<HtlVariable>(htlVariable) {
+
+    override fun resolve() = declarationAttribute
+
+    override fun isReferenceTo(element: PsiElement?): Boolean {
+        return super.isReferenceTo(element) || declarationAttribute.isEquivalentTo(element)
+    }
+
+    override fun getVariants(): Array<Any> = emptyArray()
+
+}
+
+class HtlVariableDeclarationWrapper(private val xmlAttribute: XmlAttributeImpl) : XmlAttributeReference(xmlAttribute) {
 
     override fun resolve() = xmlAttribute
 
