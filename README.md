@@ -20,7 +20,7 @@ Go to: `Preferences` / `Plugins` / `Browse Repositories...` and search for `AEM 
 
 ## Features
 
-* HTL/Sightly support (only for HTML files under `jcr_root` directory)
+* HTL/Sightly support
   * syntax validation and highlighting
   * autocompletion, inspections and documentation for:
     * block attributes (`data-sly-*`)
