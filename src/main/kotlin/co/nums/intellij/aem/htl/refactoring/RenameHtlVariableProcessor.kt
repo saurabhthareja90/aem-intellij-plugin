@@ -3,7 +3,7 @@ package co.nums.intellij.aem.htl.refactoring
 import co.nums.intellij.aem.htl.definitions.isHtlIterableBlock
 
 import co.nums.intellij.aem.htl.extensions.isHtlVariableDeclaration
-import co.nums.intellij.aem.htl.psi.HtlVariableReference
+import co.nums.intellij.aem.htl.psi.references.HtlVariableReference
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.psi.*
 import com.intellij.psi.search.LocalSearchScope

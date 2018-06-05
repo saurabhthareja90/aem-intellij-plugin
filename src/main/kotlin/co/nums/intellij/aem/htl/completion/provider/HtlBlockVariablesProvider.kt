@@ -15,6 +15,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.xml.*
 import com.intellij.util.ProcessingContext
 
+// FIXME: DRY
+
 object HtlBlockVariablesProvider : CompletionProvider<CompletionParameters>() {
 
     override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext?, result: CompletionResultSet) {
@@ -29,9 +31,9 @@ object HtlBlockVariablesProvider : CompletionProvider<CompletionParameters>() {
 
     private fun PsiElement.isInScopeOf(variable: HtlBlockVariable, templateRange: TextRange?) =
             variable.notOutOf(templateRange) && when (variable.identifierType) {
-                GLOBAL_VARIABLE -> this.isInsideOrAfterDeclarationBlockElement(variable)
-                ELEMENT_SCOPE_VARIABLE -> this.isInBlockElement(variable)
-                ELEMENT_CHILDREN_SCOPE_VARIABLE -> this.isInBlockElementChildren(variable)
+                GLOBAL_VARIABLE -> isInsideOrAfterDeclarationBlockElement(variable)
+                ELEMENT_SCOPE_VARIABLE -> isInBlockElement(variable)
+                ELEMENT_CHILDREN_SCOPE_VARIABLE -> isInBlockElementChildren(variable)
                 else -> false
             }
 

@@ -1,18 +1,24 @@
-package co.nums.intellij.aem.htl.psi
+package co.nums.intellij.aem.htl.psi.references
 
 import co.nums.intellij.aem.htl.data.blocks.HtlBlockVariable
 import co.nums.intellij.aem.htl.definitions.BlockIdentifierType
+import co.nums.intellij.aem.htl.psi.HtlVariable
 import co.nums.intellij.aem.htl.psi.search.*
 import com.intellij.lang.StdLanguages
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.psi.*
 import com.intellij.psi.impl.source.resolve.ResolveCache
+import com.intellij.psi.xml.*
 import java.util.*
+
+// FIXME: DRY
 
 class HtlVariableReference(htlVariable: HtlVariable) : PsiReferenceBase<HtlVariable>(htlVariable) {
 
-    override fun resolve() = ResolveCache.getInstance(element.project)
-            .resolveWithCaching(this, { reference, _ -> doResolve(reference) }, false, false)
+    override fun resolve(): PsiElement? {
+        return ResolveCache.getInstance(element.project)
+                .resolveWithCaching(this, { reference, _ -> doResolve(reference) }, false, false)
+    }
 
     private fun doResolve(reference: HtlVariableReference): PsiElement? {
         val variableName = reference.element.identifier.text
@@ -32,14 +38,27 @@ class HtlVariableReference(htlVariable: HtlVariable) : PsiReferenceBase<HtlVaria
     }
 
     private fun HtlBlockVariable.hasMatchingScope() = when (identifierType) {
-        BlockIdentifierType.ELEMENT_SCOPE_VARIABLE -> coversElement()
-    // TODO: what about BlockIdentifierType.ELEMENT_CHILDREN_SCOPE_VARIABLE
+        BlockIdentifierType.ELEMENT_SCOPE_VARIABLE -> isAfterDeclarationAttributeAndInTag()
+        BlockIdentifierType.ELEMENT_CHILDREN_SCOPE_VARIABLE -> isInsideOfDeclaringTag()
         BlockIdentifierType.GLOBAL_VARIABLE -> isDeclaredBeforeElement()
         BlockIdentifierType.TEMPLATE_NAME -> true
         else -> false
     }
 
-    private fun HtlBlockVariable.coversElement() = declaration.parent.textRange.contains(element.textRange)
+    private fun HtlBlockVariable.isAfterDeclarationAttributeAndInTag(): Boolean {
+        val declaringAttributeEnd = declaration.textRange.endOffset
+        val declaringElementEnd = declaration.parent.textRange.endOffset
+        return element.textOffset in declaringAttributeEnd..declaringElementEnd
+    }
+
+    private fun HtlBlockVariable.isInsideOfDeclaringTag(): Boolean {
+        val declaringTag = declaration.parent
+        val openingTagEnd = declaringTag.children
+                .filterIsInstance(XmlToken::class.java)
+                .firstOrNull { it.tokenType == XmlTokenType.XML_TAG_END }
+                ?.textRange?.endOffset ?: return false
+        return element.textOffset in openingTagEnd..declaringTag.textRange.endOffset
+    }
 
     private fun HtlBlockVariable.isDeclaredBeforeElement() = declaration.textOffset < element.textOffset
 

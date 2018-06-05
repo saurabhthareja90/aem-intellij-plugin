@@ -10,6 +10,8 @@ class HtlJavaSearch private constructor() {
 
     private val useInterfaces = arrayOf("io.sightly.java.api.Use", "org.apache.sling.scripting.sightly.pojo.Use")
     private val slingModelAnnotation = "org.apache.sling.models.annotations.Model"
+    private val globalObjectsTypesByNames: Map<String, String> = HtlGlobalObject.values()
+            .associate { Pair(it.identifier, it.type) }
 
     fun useApiClasses(project: Project) = useApiImplementers(project) + slingModels(project)
 
@@ -40,13 +42,13 @@ class HtlJavaSearch private constructor() {
      * @param project project to find class in
      * @param globalObjectName global object name
      */
-    fun globalObjectJavaClass(project: Project, globalObjectName: String?) =
-            HtlGlobalObject.values()
-                    .filter { it.name == globalObjectName }
-                    .map { it.toPsiClass(project) }
-                    .firstOrNull()
+    fun globalObjectJavaClass(project: Project, globalObjectName: String): PsiClass? {
+        return globalObjectsTypesByNames[globalObjectName]?.let {
+            project.findPsiClass(it)
+        }
+    }
 
-    private fun HtlGlobalObject.toPsiClass(project: Project) =
-            JavaPsiFacade.getInstance(project).findClass(this.type, GlobalSearchScope.allScope(project))
+    private fun Project.findPsiClass(qualifiedClassName: String) =
+            JavaPsiFacade.getInstance(this).findClass(qualifiedClassName, GlobalSearchScope.allScope(this))
 
 }

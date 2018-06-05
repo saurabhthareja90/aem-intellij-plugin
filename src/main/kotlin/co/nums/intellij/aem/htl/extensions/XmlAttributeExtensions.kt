@@ -1,13 +1,13 @@
 package co.nums.intellij.aem.htl.extensions
 
 import co.nums.intellij.aem.htl.HtlLanguage
-import co.nums.intellij.aem.htl.definitions.HtlBlock
+import co.nums.intellij.aem.htl.definitions.*
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.*
 
 private val htlBlockTypes = HtlBlock.values().map { it.type }
 private val htlVariableBlockTypes = HtlBlock.values().filter { it.identifierType.isVariable() }.map { it.type }
-private val htlImplicitVariableBlockTypes = HtlBlock.values().filter { it.iterable }.map { it.type }
+private val htlImplicitVariableBlockTypes = HtlBlock.values().filter { it.iterable || it == HtlBlock.USE }.map { it.type }
 
 fun XmlAttribute.isHtlBlock() = (firstChild as? XmlToken)?.isHtlBlock() ?: false
 
@@ -54,4 +54,18 @@ fun XmlAttribute.getUseObjectType(): String? {
         return null
     }
     return useObjectType
+}
+
+fun XmlAttribute.getHtlVariableIdentifier(): String? {
+    val blockText = (this.firstChild as XmlToken).text
+    val blockType = blockText.substringBefore('.')
+    return when {
+        blockText.contains('.') -> {
+            val identifier = blockText.substringAfter('.')
+            if (identifier.isNotBlank()) identifier else null
+        }
+        isHtlIterableBlock(blockType) -> "item"
+        blockType == HtlBlock.USE.type -> "useBean"
+        else -> null
+    }
 }

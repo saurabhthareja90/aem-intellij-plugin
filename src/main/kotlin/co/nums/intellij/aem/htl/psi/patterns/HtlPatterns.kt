@@ -7,6 +7,7 @@ import com.intellij.patterns.*
 import com.intellij.patterns.PlatformPatterns.psiElement
 import com.intellij.patterns.StandardPatterns.or
 import com.intellij.patterns.StandardPatterns.string
+import com.intellij.patterns.XmlNamedElementPattern.XmlAttributePattern
 import com.intellij.patterns.XmlPatterns.xmlAttribute
 import com.intellij.patterns.XmlPatterns.xmlAttributeValue
 import com.intellij.psi.*
@@ -56,5 +57,16 @@ object HtlPatterns {
                     .inside(psiElement(HtlTypes.STRING_LITERAL)
                             .afterLeafSkipping(psiElement(TokenType.WHITE_SPACE), psiElement(HtlTypes.EXPR_START))
                             .inside(htlBlock(HtlBlock.USE.type)))
+
+    val htlVariableDeclaration: XmlAttributePattern =
+            xmlAttribute().withLocalName(or(
+                    string().equalTo(HtlBlock.USE.type),
+                    string().equalTo(HtlBlock.LIST.type),
+                    string().equalTo(HtlBlock.REPEAT.type),
+                    string().startsWith("${HtlBlock.LIST.type}."),
+                    string().startsWith("${HtlBlock.REPEAT.type}."),
+                    string().startsWith("${HtlBlock.USE.type}."),
+                    string().startsWith("${HtlBlock.TEST.type}."),
+                    string().startsWith("${HtlBlock.TEMPLATE.type}.")))
 
 }

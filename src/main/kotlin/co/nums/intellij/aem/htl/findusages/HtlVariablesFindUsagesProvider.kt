@@ -1,5 +1,6 @@
 package co.nums.intellij.aem.htl.findusages
 
+import co.nums.intellij.aem.htl.extensions.getHtlVariableIdentifier
 import co.nums.intellij.aem.htl.lexer.HtlLexerAdapter
 import co.nums.intellij.aem.htl.psi.HtlTypes.BOOLEAN_LITERAL
 import co.nums.intellij.aem.htl.psi.HtlTypes.COMMENT_CONTENT
@@ -35,7 +36,7 @@ class HtlVariablesFindUsagesProvider : FindUsagesProvider {
     }
 
     override fun getNodeText(element: PsiElement, useFullName: Boolean): String = when (element) {
-        is XmlAttribute -> element.localName.substringAfter('.', "item")
+        is XmlAttribute -> element.getHtlVariableIdentifier() ?: ""
         is HtlVariable -> element.text
         else -> "<unknown name>"
     }

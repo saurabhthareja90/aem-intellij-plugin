@@ -5,7 +5,7 @@ import co.nums.intellij.aem.htl.definitions.HtlBlock
 import co.nums.intellij.aem.htl.extensions.*
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.xml.*
+import com.intellij.psi.xml.XmlAttribute
 
 object HtlSearch {
 
@@ -29,7 +29,7 @@ object HtlSearch {
     }
 
     private fun XmlAttribute.createHtlVariables(blockDefinition: HtlBlock): List<HtlBlockVariable> {
-        val identifier = this.getIdentifier(blockDefinition.iterable) ?: return emptyList()
+        val identifier = this.getHtlVariableIdentifier() ?: return emptyList()
         val dataType = this.getDataType(blockDefinition)
         val variable = HtlBlockVariable(identifier, blockDefinition.identifierType, dataType, this)
         if (blockDefinition.iterable) {
@@ -43,17 +43,6 @@ object HtlSearch {
         val listIdentifier = identifier + "List"
         val listDataType = this.getDataType(blockDefinition, true)
         return HtlBlockVariable(listIdentifier, blockDefinition.identifierType, listDataType, this)
-    }
-
-    private fun XmlAttribute.getIdentifier(iterable: Boolean): String? {
-        val blockText = (this.firstChild as XmlToken).text
-        if (blockText.contains('.')) {
-            val identifier = blockText.substringAfter('.')
-            return if (identifier.isNotBlank()) identifier else null
-        } else if (iterable) {
-            return "item"
-        }
-        return null
     }
 
     private fun XmlAttribute.getDataType(block: HtlBlock, implicitList: Boolean = false): String {

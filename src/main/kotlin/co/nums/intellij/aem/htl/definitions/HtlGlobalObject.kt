@@ -140,10 +140,12 @@ enum class HtlGlobalObject(
 
         val allIdentifiers = HtlGlobalObject.values()
                 .map { it.identifier }
+                .toHashSet()
 
         val predefinedPropertiesHoldersIdentifiers = HtlGlobalObject.values()
                 .filter { it.predefinedPropertiesHolder }
                 .map { it.identifier }
+                .toHashSet()
 
     }
 

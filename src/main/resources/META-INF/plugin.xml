@@ -179,11 +179,11 @@
 
         <psi.referenceContributor
                 language="HTML"
-                implementation="co.nums.intellij.aem.htl.psi.HtlVariablesReferenceContributor"/>
+                implementation="co.nums.intellij.aem.htl.psi.references.HtlVariablesReferenceContributor"/>
 
-        <targetElementEvaluator
+        <psi.referenceContributor
                 language="HTL"
-                implementationClass="co.nums.intellij.aem.htl.psi.HtlTargetElementEvaluator"/>
+                implementation="co.nums.intellij.aem.htl.psi.references.HtlGlobalObjectsReferencesContributor"/>
 
         <readWriteAccessDetector
                 implementation="co.nums.intellij.aem.htl.highlighter.HtlReadWriteAccessDetector"/>

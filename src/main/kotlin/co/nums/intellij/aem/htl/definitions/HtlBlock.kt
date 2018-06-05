@@ -6,31 +6,6 @@ import com.intellij.codeInsight.lookup.LookupElement
 
 const val HTL_BLOCK_PREFIX = "data-sly"
 
-private val htlIterableBlocksTypes = HtlBlock.values().filter { it.iterable }.map { it.type }.toSet()
-fun isHtlIterableBlock(blockType: String) = blockType in htlIterableBlocksTypes
-
-private val htlScopedVariableBlocksTypes = HtlBlock.values()
-        .filter {
-            it.identifierType == BlockIdentifierType.ELEMENT_CHILDREN_SCOPE_VARIABLE // FIXME: think about it in usages
-                    || it.identifierType == BlockIdentifierType.ELEMENT_SCOPE_VARIABLE
-        }
-        .map { it.type }
-        .toSet()
-fun isScopedVariableBlock(blockType: String) = blockType in htlScopedVariableBlocksTypes
-
-private val htlGlobalVariablesBlocksTypes = HtlBlock.values()
-        .filter { it.identifierType == BlockIdentifierType.GLOBAL_VARIABLE }
-        .map { it.type }
-        .toSet()
-fun isGlobalVariableBlock(blockType: String) = blockType in htlGlobalVariablesBlocksTypes
-
-private val htlTemplateVariablesBlocksTypes = HtlBlock.values()
-        .filter { it.identifierType == BlockIdentifierType.TEMPLATE_NAME }
-        .map { it.type }
-        .toSet()
-fun isTemplateVariableBlock(blockType: String) = blockType in htlTemplateVariablesBlocksTypes
-
-
 enum class HtlBlock(
         val type: String,
         val identifierType: BlockIdentifierType,
@@ -206,3 +181,23 @@ enum class BlockIdentifierType {
             this == GLOBAL_VARIABLE || this == ELEMENT_SCOPE_VARIABLE || this == ELEMENT_CHILDREN_SCOPE_VARIABLE
 
 }
+
+private val htlIterableBlocksTypes = blockTypes { it.iterable }
+fun isHtlIterableBlock(blockType: String) = blockType in htlIterableBlocksTypes
+
+private val htlElementScopedVariableBlocksTypes = blockTypes { it.identifierType == BlockIdentifierType.ELEMENT_SCOPE_VARIABLE }
+fun isElementScopedVariableBlock(blockType: String) = blockType in htlElementScopedVariableBlocksTypes
+
+private val htlElementChildrenScopedVariableBlocksTypes = blockTypes { it.identifierType == BlockIdentifierType.ELEMENT_CHILDREN_SCOPE_VARIABLE }
+fun isElementChildrenScopedVariableBlock(blockType: String) = blockType in htlElementChildrenScopedVariableBlocksTypes
+
+private val htlGlobalVariablesBlocksTypes = blockTypes { it.identifierType == BlockIdentifierType.GLOBAL_VARIABLE }
+fun isGlobalVariableBlock(blockType: String) = blockType in htlGlobalVariablesBlocksTypes
+
+private val htlTemplateVariablesBlocksTypes = blockTypes { it.identifierType == BlockIdentifierType.TEMPLATE_NAME }
+fun isTemplateVariableBlock(blockType: String) = blockType in htlTemplateVariablesBlocksTypes
+
+private fun blockTypes(predicate: (HtlBlock) -> Boolean) = HtlBlock.values()
+        .filter(predicate)
+        .map { it.type }
+        .toHashSet()
